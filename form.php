@@ -23,7 +23,7 @@ $tipos_de_via = get_tipos_de_via();
 $tipos_de_vivienda = get_tipos_de_vivienda();
 $viviendas = get_viviendas();
 
-echo json_encode(sql_to_array($comunidades));
+//echo json_encode(sql_to_array($comunidades));
 
 ?>
 <div id="title"><h1>Añadir tasación</h1></div>
@@ -40,8 +40,8 @@ echo json_encode(sql_to_array($comunidades));
                 <select id="select_comunidad">
                     <option value="0" selected>Selecciona...</option> 
                     <?php
-                    crear_lista($comunidades);
-                    ?>                  
+                    //crear_lista($comunidades);
+                    ?>
                 </select>
                 </td>
             </tr>
@@ -106,15 +106,15 @@ echo json_encode(sql_to_array($comunidades));
             </tr>
             <tr>
                 <td><label>Metros reales</label></td>
-                <td><input type="number" id="metros_reales" class="decimales"/></td>
+                <td><input type="text" id="metros_reales" class="decimales"/></td>
             </tr>
             <tr>
                 <td><label>Metros computados</label></td>
-                <td><input type="number" id="metros_computados" class="decimales"/></td>
+                <td><input type="text" id="metros_computados" class="decimales"/></td>
             </tr>
             <tr>
                 <td><label>Valor m<sup>2</sup></label></td>
-                <td><input type="number" id="valor_metro_cuadrado"/></td>
+                <td><input type="text" id="valor_metro_cuadrado"/></td>
             </tr>
             <!-- https://desarrolloweb.com/articulos/1307.php -->
             <tr>
@@ -133,6 +133,17 @@ echo json_encode(sql_to_array($comunidades));
 <script>
 // A $( document ).ready() block.
 $(document).ready(function() {
+    
+    //Función para cargar un select desde un archivo JSON
+    $.getJSON('json/comunidades.json', function(data) {
+        $.each(data, function(key, value) {
+                $("#select_comunidad").append('<option id="' + value.id + '">' + value.comunidad + '</option>');
+        }); // close each()
+    }); // close getJSON()
+    
+    
+    
+    
     //Deshabilitamos los selectsde provincia y municipio al iniciar la página
     $("#select_provincia").prop("disabled",true);
     $("#select_municipio").prop("disabled",true);
@@ -169,6 +180,20 @@ $(document).ready(function() {
     $('.decimales').on('input', function () {
         this.value = this.value.replace(/[^0-9,.]/g, '').replace(/,/g, '.');
     });
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 });//Final Document Ready Function
 

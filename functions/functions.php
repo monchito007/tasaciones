@@ -5,6 +5,9 @@ function consulta_sql($query){
     //Abrimos la conexión al servidor MySQL
     $con = connect_db();
     
+    //formato de datos utf8
+    //mysqli_set_charset($con, "utf8"); //formato de datos utf8
+    
     //Obtenemos los datos de la Query
     $datos = mysqli_query($con, $query);
     
