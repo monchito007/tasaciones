@@ -51,7 +51,7 @@ $viviendas = get_viviendas();
                 <select id="select_provincia">
                     <option value="0" selected>Selecciona...</option> 
                     <?php
-                    crear_lista($provincias);
+                    //crear_lista($provincias);
                     ?>     
                 </select>
                 </td>
@@ -134,47 +134,46 @@ $viviendas = get_viviendas();
 // A $( document ).ready() block.
 $(document).ready(function() {
     
-    //Función para cargar un select desde un archivo JSON
+    //Función para cargar un select desde un archivo JSON    
     $.getJSON('json/comunidades.json', function(data) {
         $.each(data, function(key, value) {
-                $("#select_comunidad").append('<option id="' + value.id + '">' + value.comunidad + '</option>');
+                $("#select_comunidad").append('<option value=' + value.id + '>' + value.comunidad + '</option>');
         }); // close each()
     }); // close getJSON()
     
-    
-    
-    
-    //Deshabilitamos los selectsde provincia y municipio al iniciar la página
-    $("#select_provincia").prop("disabled",true);
-    $("#select_municipio").prop("disabled",true);
-    $("#select_municipio").prop("disabled",true);
-    
-    //Habilitamos el select provincia si se ha seleccionado una comunidad
-    $("#select_comunidad").on('change', function() {
-        if(this.value!=="0"){
-            $("#select_provincia").prop("disabled",false);
-        }else{
+    $("#select_comunidad").change(function(){
+        
+        var id_comunidad = $("#select_comunidad").val();
+        
+        if(id_comunidad==='0'){
             $("#select_provincia").prop("disabled",true);
+        }else{
+            $("#select_provincia").prop("disabled",false);
+            
+            //Vaciamos el select
+            $("#select_provincia").empty();
+            
+            //Función para cargar un select desde un archivo JSON    
+            $.getJSON('json/provincias.json', function(data){
+                $.each(data, function(key, value) {
+                    
+                        if(parseInt(id_comunidad)===value.comunidad_id){
+                            $("#select_provincia").append('<option value=' + value.id + '>' + value.provincia + '</option>');
+                            //alert(value.id + " - " + value.provincia);
+                        }
+                }); // close each()
+            }); // close getJSON()
+            
         }
+        
     });
     
-    //Habilitamos el select municipio si se ha seleccionado una provincia
-    $("#select_provincia").on('change', function() {
-        if(this.value!=="0"){
-            $("#select_municipio").prop("disabled",false);
-        }else{
-            $("#select_municipio").prop("disabled",true);
-        }
-    });
     
-    //Habilitamos el campo de texto direccion si se ha seleccionado tipo de via
-    $("#select_tipo_via").on('change', function() {
-        if(this.value!=="0"){
-            $("#direccion").prop("disabled",false);
-        }else{
-            $("#direccion").prop("disabled",true);
-        }
-    });
+    
+    
+    
+    
+ 
     
     //Creamos la clase decimales para los imput.
     $('.decimales').on('input', function () {
