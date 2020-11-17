@@ -28,7 +28,13 @@ Comentarios:
             .content{
                 background-color: #cacaca;
             }
-            
+            ::placeholder {
+                font-style: italic;
+                color: #cacaca;
+            }
+            textarea {
+                width: 250px;
+            }
         </style>
     </head>
     <body>
