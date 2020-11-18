@@ -1,0 +1,5 @@
+Ejemplo PHP crear y leer JSON de una tabla mySQL.txt
+https://ejemplocodigo.com/ejemplo-php-crear-y-leer-json-de-una-tabla-mysql/
+
+Upload de archivos con PHP
+https://desarrolloweb.com/articulos/1307.php

@@ -1,1 +1,0 @@
-https://ejemplocodigo.com/ejemplo-php-crear-y-leer-json-de-una-tabla-mysql/
