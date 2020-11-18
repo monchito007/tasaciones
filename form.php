@@ -32,14 +32,14 @@ $viviendas = get_viviendas();
 
 <div id="form">
 
-    <form method="POST" action="save_form.php">
+    <form method="POST" action="save_form.php" enctype="multipart/form-data">
         <table id="table_formulario">
             <!-- Selects dinamicos
             https://desarrolloweb.com/articulos/1281.php -->
             <tr>
                 <td><label>Comunidad</label></td>
                 <td>
-                    <select id="select_comunidad">
+                    <select id="select_comunidad" name="select_comunidad">
                         <option value="0" selected>Selecciona...</option> 
                     </select>
                 </td>
@@ -47,7 +47,7 @@ $viviendas = get_viviendas();
             <tr>
                 <td><label>Provincia</label></td>
                 <td>
-                    <select id="select_provincia">
+                    <select id="select_provincia" name="select_provincia">
                         <option value="0" selected>Selecciona...</option>
                     </select>
                 </td>
@@ -55,7 +55,7 @@ $viviendas = get_viviendas();
             <tr>
                 <td><label>Municipio</label></td>
                 <td>
-                    <select id="select_municipio">
+                    <select id="select_municipio" name="select_municipio">
                         <option value="0" selected>Selecciona...</option> 
                     </select>
                 </td>
@@ -63,19 +63,19 @@ $viviendas = get_viviendas();
             <tr>
                 <td><label>Tipo de via</label></td>
                 <td>
-                    <select id="select_tipo_via">
+                    <select id="select_tipo_via" name="select_tipo_via">
                         <option value="0" selected>Selecciona...</option> 
                     </select>
                 </td>
             </tr>
             <tr>
                 <td><label>Direccion</label></td>
-                <td><textarea id="direccion" placeholder="Añade la dirección..."></textarea></td>
+                <td><textarea id="direccion" name="direccion" placeholder="Añade la dirección..."></textarea></td>
             </tr>
             <tr>
                 <td><label>Tipo de vivienda</label></td>
                 <td>
-                    <select id="select_tipo_vivienda">
+                    <select id="select_tipo_vivienda" name="select_tipo_vivienda">
                         <option value="0" selected>Selecciona...</option> 
                         <?php
                         //crear_lista($tipos_de_vivienda);
@@ -86,7 +86,7 @@ $viviendas = get_viviendas();
             <tr>
                 <td><label>Vivienda</label></td>
                 <td>
-                    <select id="select_viviendas">
+                    <select id="select_viviendas" name="select_viviendas">
                         <option value="0" selected>Selecciona...</option> 
                         <?php
                         //crear_lista($viviendas);
@@ -96,20 +96,23 @@ $viviendas = get_viviendas();
             </tr>
             <tr>
                 <td><label>Metros reales</label></td>
-                <td><input type="text" id="metros_reales" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="metros reales..."/></td>
+                <td><input type="text" id="metros_reales" name="metros_reales" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="metros reales..."/></td>
             </tr>
             <tr>
                 <td><label>Metros computados</label></td>
-                <td><input type="text" id="metros_computados" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="metros computados..."/></td>
+                <td><input type="text" id="metros_computados" name="metros_computados" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="metros computados..."/></td>
             </tr>
             <tr>
                 <td><label>Valor m<sup>2</sup> (€)</label></td>
-                <td><input type="text" id="valor_metro_cuadrado" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="valor metro..."/></td>
+                <td><input type="text" id="valor_metro_cuadrado" name="valor_metro_cuadrado" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="valor metro..."/></td>
             </tr>
             <!-- https://desarrolloweb.com/articulos/1307.php -->
             <tr>
                 <td><label>Archivo de tasación</label></td>
-                <td><input name="userfile" type="file"></td>
+                <td><input id="file" name="file" type="file"></td>
+            </tr>
+            <tr>
+                <td><input type="submit" id="SubirBtn" name="SubirBtn" value="Subir" /></td>
             </tr>
 
 
