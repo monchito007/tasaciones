@@ -13,8 +13,10 @@ Comentarios:
 ?>
 <?php
 
-include 'connection/connect_db.php';
+include 'functions/connect_db.php';
 include 'functions/functions.php';
+
+echo "Num Tasaciones: ".obtener_num_tasaciones();
 
 /*
 $comunidades = get_comunidades();
@@ -273,19 +275,6 @@ $(document).ready(function(){
     $('.decimales').on('input', function () {
         this.value = this.value.replace(/[^0-9,.]/g, '').replace(/,/g, '.');
     });
-    
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 });//Final Document Ready Function

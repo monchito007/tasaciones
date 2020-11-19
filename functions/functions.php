@@ -22,6 +22,26 @@ function consulta_sql($query){
     
 }
 
+//Función para obtener el número de registros de la tabla Tasaciones
+function obtener_num_tasaciones(){
+    
+    //Abrimos la conexión al servidor MySQL
+    $con = connect_db();
+    
+    //Obtenemos los datos de la Query
+    $res = mysqli_query($con, "SELECT COUNT(*) FROM tasaciones");
+    
+    //Convertimos el resultado en array
+    $fila= mysqli_fetch_array($res);
+
+    //Cerramos la conexion al servidor MySQL
+    mysqli_close($con);
+    
+    //Devolvemos los datos
+    return $fila[0]; 
+    
+}
+
 //Función para crear una lista a partir del resultado de una consulta SQL
 function crear_lista($result){
     
