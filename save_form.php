@@ -68,7 +68,7 @@ if (strpos($tipo_archivo, "application/pdf") && ($tamano_archivo < 10000000)) {
 }else{
         
         //Creamos el directorio y le damos permisos
-        $path="tasaciones/".$num_tasacion;
+        $path="docs/".$num_tasacion;
         mkdir($path,0777,TRUE);
         
    	if (move_uploaded_file($_FILES['file']['tmp_name'],  $path."/".$num_tasacion.".pdf")){
@@ -77,5 +77,17 @@ if (strpos($tipo_archivo, "application/pdf") && ($tamano_archivo < 10000000)) {
       		echo "Ocurrió algún error al subir el fichero. No pudo guardarse.";
    	}
 }
+
+//INSERT INTO tasaciones (comunidad_id, provincia_id, municipio_id, direccion, id_tipo_de_via, id_tipo_de_vivienda, id_vivienda, metros_reales, metros_computados, valor_metros_cuadrados, archivo)
+//VALUES ($select_comunidad, $select_provincia, $select_municipio, $select_tipo_via, $direccion, $select_tipo_vivienda, $select_viviendas, $metros_reales, $metros_computados, $valor_metro_cuadrado, $file);
+
+$query = "INSERT INTO tasaciones (comunidad_id, provincia_id, municipio_id, direccion, id_tipo_de_via, id_tipo_de_vivienda, id_vivienda, metros_reales, metros_computados, valor_metros_cuadrados, archivo) "
+        . "VALUES ($select_comunidad, $select_provincia, $select_municipio, $select_tipo_via, '$direccion', $select_tipo_vivienda, $select_viviendas, $metros_reales, $metros_computados, $valor_metro_cuadrado, $num_tasacion);";
+
+//echo $query;
+
+consulta_sql($query);
+
+
 
 ?>

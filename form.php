@@ -34,7 +34,7 @@ $viviendas = get_viviendas();
 
 <div id="form">
 
-    <form method="POST" action="save_form.php" enctype="multipart/form-data">
+    <form method="POST" action="save_form.php" enctype="multipart/form-data" onsubmit="return validar_form(this)">
         <table id="table_formulario">
             <!-- Selects dinamicos
             https://desarrolloweb.com/articulos/1281.php -->
@@ -98,33 +98,129 @@ $viviendas = get_viviendas();
             </tr>
             <tr>
                 <td><label>Metros reales</label></td>
-                <td><input type="text" id="metros_reales" name="metros_reales" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="metros reales..."/></td>
+                <td><input type="text" id="metros_reales" name="metros_reales" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="metros reales..."/><i>metros</i></td>
             </tr>
             <tr>
                 <td><label>Metros computados</label></td>
-                <td><input type="text" id="metros_computados" name="metros_computados" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="metros computados..."/></td>
+                <td><input type="text" id="metros_computados" name="metros_computados" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="metros computados..."/><i>metros</i></td>
             </tr>
             <tr>
-                <td><label>Valor m<sup>2</sup> (€)</label></td>
-                <td><input type="text" id="valor_metro_cuadrado" name="valor_metro_cuadrado" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="valor metro..."/></td>
+                <td><label>Valor m<sup>2</sup></label></td>
+                <td><input type="text" id="valor_metro_cuadrado" name="valor_metro_cuadrado" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="valor metro..."/><i>€</i></td>
             </tr>
             <!-- https://desarrolloweb.com/articulos/1307.php -->
             <tr>
                 <td><label>Archivo de tasación</label></td>
-                <td><input id="file" name="file" type="file"></td>
+                <td><input id="file" name="file" type="file"></td>                
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="button" id="DelBtn" name="DelBtn" value="Eliminar archivo" onclick="eliminar_archivo()"/></td>
             </tr>
             <tr>
                 <td><input type="submit" id="SubirBtn" name="SubirBtn" value="Subir" /></td>
+                <td><input type="reset" value="Borrar"></td>
+                
             </tr>
-
-
-
-
-
         </table>
     </form>
 
 </div>
+<div id="errores_form"></div>
+
+<script type="text/javascript">
+
+function eliminar_archivo(){
+    
+    document.getElementById("file").value = "";
+    
+}
+
+function validar_form(){
+    
+    var valido=true;
+    
+    document.getElementById("select_comunidad").style.borderColor = "green";
+    document.getElementById("select_provincia").style.borderColor = "green";
+    document.getElementById("select_municipio").style.borderColor = "green";
+    document.getElementById("select_tipo_via").style.borderColor = "green";
+    document.getElementById("direccion").style.borderColor = "green";
+    document.getElementById("select_tipo_vivienda").style.borderColor = "green";
+    document.getElementById("select_viviendas").style.borderColor = "green";
+    document.getElementById("metros_reales").style.borderColor = "green";
+    document.getElementById("metros_computados").style.borderColor = "green";
+    document.getElementById("valor_metro_cuadrado").style.borderColor = "green";
+    
+    document.getElementById("errores_form").innerHTML="<ul id='errores'></ul>";
+    
+    if(document.getElementById("select_comunidad").value==="0"){
+        document.getElementById("errores").innerHTML+="<li>Debes seleccionar una comunidad.</li>";
+        document.getElementById("select_comunidad").style.borderColor = "red";
+        valido=false;
+    }
+    if(document.getElementById("select_provincia").value==="0"){
+        document.getElementById("errores").innerHTML+="<li>Debes seleccionar una provincia.</li>";
+        document.getElementById("select_provincia").style.borderColor = "red";
+        valido=false;
+    }
+    if(document.getElementById("select_municipio").value==="0"){
+        document.getElementById("errores").innerHTML+="<li>Debes seleccionar un municipio.</li>";
+        document.getElementById("select_municipio").style.borderColor = "red";
+        valido=false;
+    }
+    if(document.getElementById("select_tipo_via").value==="0"){
+        document.getElementById("errores").innerHTML+="<li>Debes seleccionar un tipo de via.</li>";
+        document.getElementById("select_tipo_via").style.borderColor = "red";
+        valido=false;
+    }
+    if(document.getElementById("direccion").value.length < 3){
+        document.getElementById("errores").innerHTML+="<li>Debes introducir una dirección</li>";
+        document.getElementById("direccion").style.borderColor = "red";
+        valido=false;
+    }
+    if(document.getElementById("select_tipo_vivienda").value==="0"){
+        document.getElementById("errores").innerHTML+="<li>Debes seleccionar un tipo de vivienda.</li>";
+        document.getElementById("select_tipo_vivienda").style.borderColor = "red";
+        valido=false;
+    }
+    if(document.getElementById("select_viviendas").value==="0"){
+        document.getElementById("errores").innerHTML+="<li>Debes seleccionar una vivienda.</li>";
+        document.getElementById("select_viviendas").style.borderColor = "red";
+        valido=false;
+    }
+    if(document.getElementById("metros_reales").value===""){
+        document.getElementById("errores").innerHTML+="<li>Debes añadir los metros reales.</li>";
+        document.getElementById("metros_reales").style.borderColor = "red";
+        valido=false;
+    }
+    if(document.getElementById("metros_computados").value===""){
+        document.getElementById("errores").innerHTML+="<li>Debes añadir los metros computados.</li>";
+        document.getElementById("metros_computados").style.borderColor = "red";
+        valido=false;
+    }
+    if(document.getElementById("valor_metro_cuadrado").value===""){
+        document.getElementById("errores").innerHTML+="<li>Debes añadir el valor del m<sup>2</sup>.</li>";
+        document.getElementById("valor_metro_cuadrado").style.borderColor = "red";
+        valido=false;
+    }
+        
+    var filePath = document.getElementById('file').value;    
+    var extension = filePath.slice(-3).toLowerCase();
+    var fileSize = document.getElementById('file').size;
+    
+    alert("filesize: " + fileSize);
+    
+    if((extension==='')||(extension!=='pdf')){
+        document.getElementById("errores").innerHTML+="<li>Archivo no cargado o de extensión incorrecta. Debe ser en formato PDF. Máximo 10 Mb. </li>";
+        document.getElementById("file").style.borderColor = "red";
+        valido=false;
+    }
+    
+    return valido;
+    
+}
+
+</script>
 <script>
 $(document).ready(function(){
     
@@ -269,19 +365,11 @@ $(document).ready(function(){
     }); 
     
     
- 
-    
-    //Creamos la clase decimales para los imput.
-    $('.decimales').on('input', function () {
-        this.value = this.value.replace(/[^0-9,.]/g, '').replace(/,/g, '.');
-    });
-    
-    
 });//Final Document Ready Function
 
 </script>
 <script type="text/javascript">
-<!--
+
 function filterFloat(evt,input){
     // Backspace = 8, Enter = 13, ‘0′ = 48, ‘9′ = 57, ‘,’ = 44, ‘-’ = 43
     var key = window.Event ? evt.which : evt.keyCode;
@@ -316,7 +404,7 @@ function filter(__val__){
     }
     
 }
--->
+
 </script>
 
 
