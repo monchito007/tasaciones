@@ -5,7 +5,7 @@
 Titulo: form.php
 Autor: Moisés Aguilar Miranda
 Fecha: 04/11/2020
-Descripción: Página para añadir tasaciones a la base de datos.
+Descripción: Formulario para añadir las tasaciones.
 Comentarios:
  
 **********************************************************************/
@@ -16,7 +16,7 @@ Comentarios:
 include 'functions/connect_db.php';
 include 'functions/functions.php';
 
-echo "Num Tasaciones: ".obtener_num_tasaciones();
+//echo "Num Tasaciones: ".obtener_num_tasaciones();
 
 /*
 $comunidades = get_comunidades();
@@ -32,10 +32,10 @@ $viviendas = get_viviendas();
 ?>
 <div id="title"><h1>Añadir tasación</h1></div>
 
-<div id="form">
+<div id="content2">
 
     <form method="POST" action="save_form.php" enctype="multipart/form-data" onsubmit="return validar_form(this)">
-        <table id="table_formulario">
+        <table class="tabla" id="table_formulario">
             <!-- Selects dinamicos
             https://desarrolloweb.com/articulos/1281.php -->
             <tr>

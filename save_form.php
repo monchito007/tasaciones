@@ -1,4 +1,17 @@
 <?php
+
+/**********************************************************************
+
+Titulo: save_form.php
+Autor: Moisés Aguilar Miranda
+Fecha: 14/12/2020
+Descripción: Página para guardar los datos en la base de datos.
+Comentarios:
+ 
+**********************************************************************/
+
+?>
+<?php
 //phpinfo();
 
 include 'functions/connect_db.php';

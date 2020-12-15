@@ -17,9 +17,6 @@ function consulta_sql($query){
     //Cerramos la conexion al servidor MySQL
     mysqli_close($con);
     
-    //Devolvemos los Errores de la consulta SQL
-    echo mysqli_errno($con) . ": " . mysqli_error($con) . "\n";
-    
     //Devolvemos los datos
     return $datos;    
     
