@@ -28,26 +28,29 @@ $result = consulta_sql($query);
 <div id="title"><h1>Listado de Tasaciones</h1></div>
 
 <div id="content2">
-    <table class="tabla">
-        <tr>
-            <th>Id</th>
-            <th>Comunidad</th>
-            <th>Provincia</th>
-            <th>Municipio</th>
-            <th>Direccion</th>
-            <th>Tipo de via</th>
-            <th>Tipo de vivienda</th>
-            <th>Vivienda</th>
-            <th>Metros reales</th>
-            <th>Metros computados</th>
-            <th>Valor m<sup>2</sup></th>
-            <th>Archivo</th>            
-        </tr>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Comunidad</th>
+                <th scope="col">Provincia</th>
+                <th scope="col">Municipio</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Tipo de via</th>
+                <th scope="col">Tipo de vivienda</th>
+                <th scope="col">Vivienda</th>
+                <th scope="col">Metros reales</th>
+                <th scope="col">Metros computados</th>
+                <th scope="col">Valor m<sup>2</sup></th>
+                <th scope="col">Archivo</th>            
+            </tr>
+        </thead>
+        <tbody>
 <?php
     while($datos = mysqli_fetch_array($result)){
         
         echo "<tr>";
-        echo "<td>".$datos[0]."</td>";
+        echo "<th scope='row'>".$datos[0]."</th>";
         echo "<td>".$datos[1]."</td>";
         echo "<td>".$datos[2]."</td>";
         echo "<td>".$datos[3]."</td>";
@@ -64,5 +67,6 @@ $result = consulta_sql($query);
     }
 
 ?>      
+        </tbody>
     </table>
 </div>

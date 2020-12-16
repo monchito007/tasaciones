@@ -27,7 +27,7 @@ Comentarios:
         <script src="js/jquery-3.5.1.min.js"></script>
         <style>
             body{
-                background-color: gainsboro;
+                background-color: #gggggg;
             }
             .sidebar{
                 background-color: dodgerblue;
