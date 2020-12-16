@@ -24,9 +24,9 @@ $select_tipo_via = $_POST["select_tipo_via"];
 $direccion = $_POST["direccion"];
 $select_tipo_vivienda = $_POST["select_tipo_vivienda"];
 $select_viviendas = $_POST["select_viviendas"];
-$metros_reales = $_POST["metros_reales"];
-$metros_computados = $_POST["metros_computados"];
-$valor_metro_cuadrado = $_POST["valor_metro_cuadrado"];
+$metros_reales = str_replace(",",".", $_POST["metros_reales"]);
+$metros_computados = str_replace(",",".", $_POST["metros_computados"]);
+$valor_metro_cuadrado = str_replace(",",".", $_POST["valor_metro_cuadrado"]);
 $file = $_FILES["file"]["name"];
 $SubirBtn = $_POST["SubirBtn"];
 
@@ -95,9 +95,9 @@ if (strpos($tipo_archivo, "application/pdf") && ($tamano_archivo < 10000000)) {
 //VALUES ($select_comunidad, $select_provincia, $select_municipio, $select_tipo_via, $direccion, $select_tipo_vivienda, $select_viviendas, $metros_reales, $metros_computados, $valor_metro_cuadrado, $file);
 
 $query = "INSERT INTO tasaciones (comunidad_id, provincia_id, municipio_id, direccion, id_tipo_de_via, id_tipo_de_vivienda, id_vivienda, metros_reales, metros_computados, valor_metros_cuadrados, archivo) "
-        . "VALUES ($select_comunidad, $select_provincia, $select_municipio, $select_tipo_via, '$direccion', $select_tipo_vivienda, $select_viviendas, $metros_reales, $metros_computados, $valor_metro_cuadrado, $num_tasacion);";
+        . "VALUES ($select_comunidad, $select_provincia, $select_municipio, '$direccion', $select_tipo_via, $select_tipo_vivienda, $select_viviendas, $metros_reales, $metros_computados, $valor_metro_cuadrado, $num_tasacion);";
 
-//echo $query;
+echo $query;
 
 consulta_sql($query);
 

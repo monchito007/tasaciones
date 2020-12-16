@@ -208,7 +208,7 @@ function validar_form(){
     var extension = filePath.slice(-3).toLowerCase();
     var fileSize = document.getElementById('file').size;
     
-    alert("filesize: " + fileSize);
+    //alert("filesize: " + fileSize);
     
     if((extension==='')||(extension!=='pdf')){
         document.getElementById("errores").innerHTML+="<li>Archivo no cargado o de extensión incorrecta. Debe ser en formato PDF. Máximo 10 Mb. </li>";
