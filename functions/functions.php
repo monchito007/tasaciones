@@ -42,6 +42,43 @@ function obtener_num_tasaciones(){
     
 }
 
+//Función para obtener el número de registros de la tabla Tasaciones
+function obtener_id_tasacion(){
+    
+    //Abrimos la conexión al servidor MySQL
+    $con = connect_db();
+    
+    //Obtenemos los datos de la Query
+    $res = mysqli_query($con, "SELECT id FROM tasaciones ORDER BY id DESC");
+    
+    //Convertimos el resultado en array
+    $fila= mysqli_fetch_array($res);
+
+    //Cerramos la conexion al servidor MySQL
+    mysqli_close($con);
+    
+    //Devolvemos los datos
+    return $fila[0]; 
+    
+}
+
+//Función para eliminar un directorio
+function deleteDirectory($dir) {
+    if(!$dh = @opendir($dir)) return;
+    while (false !== ($current = readdir($dh))) {
+        if($current != '.' && $current != '..') {
+            echo 'Se ha borrado el archivo '.$dir.'/'.$current.'<br/>';
+            if (!@unlink($dir.'/'.$current)) 
+                deleteDirectory($dir.'/'.$current);
+        }       
+    }
+    closedir($dh);
+    //echo 'Se ha borrado el directorio '.$dir.'<br/>';
+    @rmdir($dir);
+    
+    return;
+}
+
 //Función para crear una lista a partir del resultado de una consulta SQL
 function crear_lista($result){
     

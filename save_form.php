@@ -1,4 +1,7 @@
 <?php
+session_start();
+?>
+<?php
 
 /**********************************************************************
 
@@ -64,42 +67,43 @@ echo "</tr>";
 
 echo "</table>";
 
-//if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Upload') {
-//...
-//}
-
 //datos del arhivo
 $nombre_archivo = $_FILES['file']['name'];
 $tipo_archivo = $_FILES['file']['type'];
 $tamano_archivo = $_FILES['file']['size'];
 
-$num_tasacion = (obtener_num_tasaciones()+1);
-	
+//Obtenemos el id de la nueva tasación
+$id_tasacion = obtener_id_tasacion()+1;
+
+$direccion = str_replace("'", "''", $direccion);
+
+$query = "INSERT INTO tasaciones (comunidad_id, provincia_id, municipio_id, direccion, id_tipo_de_via, id_tipo_de_vivienda, id_vivienda, metros_reales, metros_computados, valor_metros_cuadrados) "
+        . "VALUES ($select_comunidad, $select_provincia, $select_municipio, '$direccion', $select_tipo_via, $select_tipo_vivienda, $select_viviendas, $metros_reales, $metros_computados, $valor_metro_cuadrado);";
+
+
 //compruebo si las características del archivo son las que deseo
-if (strpos($tipo_archivo, "application/pdf") && ($tamano_archivo < 10000000)) {
-   	echo "La extensión o el tamaño del archivos no es correcta. <br><br><table><tr><td><li>Se permiten archivos .pdf<br><li>se permiten archivos de 10 Mb máximo.</td></tr></table>";
+if (strpos($tipo_archivo, "application/pdf") && ($tamano_archivo < 10000000)){
+        echo "La extensión o el tamaño del archivos no es correcta. <br><br><table><tr><td><li>Se permiten archivos .pdf<br><li>se permiten archivos de 10 Mb máximo.</td></tr></table>";
 }else{
-        
         //Creamos el directorio y le damos permisos
-        $path="docs/".$num_tasacion;
+        $path="docs/".$id_tasacion;
         mkdir($path,0777,TRUE);
-        
-   	if (move_uploaded_file($_FILES['file']['tmp_name'],  $path."/".$num_tasacion.".pdf")){
-      		echo "El archivo ha sido cargado correctamente.";
-   	}else{
-      		echo "Ocurrió algún error al subir el fichero. No pudo guardarse.";
-   	}
-}
 
-//INSERT INTO tasaciones (comunidad_id, provincia_id, municipio_id, direccion, id_tipo_de_via, id_tipo_de_vivienda, id_vivienda, metros_reales, metros_computados, valor_metros_cuadrados, archivo)
-//VALUES ($select_comunidad, $select_provincia, $select_municipio, $select_tipo_via, $direccion, $select_tipo_vivienda, $select_viviendas, $metros_reales, $metros_computados, $valor_metro_cuadrado, $file);
+        //Movemos el archivo 
+        if (move_uploaded_file($_FILES['file']['tmp_name'],  $path."/".$id_tasacion.".pdf")){
+                echo "El archivo ha sido cargado correctamente.";
+                consulta_sql($query);
+                
+                $_SESSION['page']='list.php';
+                header('Location: content.php');
+                
+        }else{
+                echo utf8_decode("Ocurrió algún error al subir el fichero. No pudo guardarse.");
+        }
+} 
 
-$query = "INSERT INTO tasaciones (comunidad_id, provincia_id, municipio_id, direccion, id_tipo_de_via, id_tipo_de_vivienda, id_vivienda, metros_reales, metros_computados, valor_metros_cuadrados, archivo) "
-        . "VALUES ($select_comunidad, $select_provincia, $select_municipio, '$direccion', $select_tipo_via, $select_tipo_vivienda, $select_viviendas, $metros_reales, $metros_computados, $valor_metro_cuadrado, $num_tasacion);";
 
 echo $query;
-
-consulta_sql($query);
 
 
 

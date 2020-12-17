@@ -5,6 +5,9 @@ if($_REQUEST['page']){
 }else{
     $_SESSION["page"] = 'list.php';
 }
+if($_REQUEST['id']){
+    $_SESSION["id"] = $_REQUEST['id'];
+}
 
 header('Location: content.php');
 

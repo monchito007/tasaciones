@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!$_SESSION["page"]){
-    $_SESSION["page"] = "form.php"; 
+    $_SESSION["page"] = "form.php";
 }
 ?>
 <?php
@@ -20,8 +20,10 @@ Comentarios:
     <head>
         <title>Tasaciones</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
+        <?php
+        if($_SESSION["page"] == "form.php"){echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">';}
+        else{echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';}
+        ?>
         <meta http-equiv="Content-Type" content="text/html; iso-8859-1">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
         <script src="js/jquery-3.5.1.min.js"></script>
@@ -45,17 +47,18 @@ Comentarios:
         </style>
     </head>
     <body>
-        <nav>
-            <ul>
-                <li><a href="page.php?page=form.php">Form</a></li>
-                <li><a href="page.php?page=list.php">List</a></li>                
+        <!-- https://getbootstrap.com/docs/4.1/components/navbar/ -->
+        <nav class="navbar navbar-dark bg-dark">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active"><a class="nav-link" href="page.php?page=form.php">Form</a></li>
+                <li class="nav-item active"><a class="nav-link" href="page.php?page=list.php">List</a></li>
             </ul>
         </nav>
         <div id="content">
             <?php
                 include $_SESSION["page"];
                 //include 'list.php';
-            ?>                        
+            ?>
         </div>
     </body>
 </html>
