@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!$_SESSION["page"]){
-    $_SESSION["page"] = "form.php";
+    $_SESSION["page"] = "list.php";
 }
 ?>
 <?php
@@ -39,6 +39,12 @@ Comentarios:
                 font-style: italic;
                 color: #cacaca;
             }
+            input[type=text]{
+                width: 250px;
+            }
+            select{
+                width: 250px;
+            }
             textarea {
                 width: 250px;
             }
@@ -53,6 +59,11 @@ Comentarios:
             }
             input{
                 background-color: white;
+            }
+            #errores_form ul li{
+                color: #cc0000;
+                font-style: italic;
+                font-size: 14px;
             }
 
         </style>

@@ -30,7 +30,7 @@ $query = "SELECT d.id, a.comunidad, b.provincia, c.municipio, d.direccion, e.tip
 $result = consulta_sql($query);
 
 ?>
-<div id="title"><h1>Listado de Tasaciones</h1></div>
+<div id="title"><h1>Borrar tasaci&oacute;n <?php echo $_SESSION['id']; ?></h1></div>
 
 <div id="content2">
     <table class="table table-hover">
