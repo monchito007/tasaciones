@@ -17,7 +17,7 @@ include 'functions/connect_db.php';
 include 'functions/functions.php';
 
 if(!isset($_SESSION['order'])){
-    $_SESSION['order']='ASC';
+    $order = 'ASC';
 }else{
     $order = $_SESSION['order'];
     
