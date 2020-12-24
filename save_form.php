@@ -82,7 +82,7 @@ $query = "INSERT INTO tasaciones (comunidad_id, provincia_id, municipio_id, dire
 
 
 //compruebo si las características del archivo son las que deseo
-if (strpos($tipo_archivo, "application/pdf") && ($tamano_archivo < 10000000)){
+if (strpos($tipo_archivo, "application/pdf") && ($tamano_archivo < 20000000)){
         echo "La extensión o el tamaño del archivos no es correcta. <br><br><table><tr><td><li>Se permiten archivos .pdf<br><li>se permiten archivos de 10 Mb máximo.</td></tr></table>";
 }else{
         //Creamos el directorio y le damos permisos

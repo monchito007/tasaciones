@@ -25,11 +25,11 @@ function consulta_sql($query){
 //Función para obtener el número de registros de la tabla Tasaciones
 function obtener_num_tasaciones(){
     
-    //Abrimos la conexión al servidor MySQL
-    $con = connect_db();
+    //Declaramos la query
+    $query = "SELECT COUNT(*) FROM tasaciones";
     
     //Obtenemos los datos de la Query
-    $res = mysqli_query($con, "SELECT COUNT(*) FROM tasaciones");
+    $res = consulta_sql($query);
     
     //Convertimos el resultado en array
     $fila= mysqli_fetch_array($res);
@@ -45,11 +45,11 @@ function obtener_num_tasaciones(){
 //Función para obtener el número de registros de la tabla Tasaciones
 function obtener_id_tasacion(){
     
-    //Abrimos la conexión al servidor MySQL
-    $con = connect_db();
+    //Declaramos la query
+    $query = "SELECT id FROM tasaciones ORDER BY id DESC";
     
     //Obtenemos los datos de la Query
-    $res = mysqli_query($con, "SELECT id FROM tasaciones ORDER BY id DESC");
+    $res = consulta_sql($query);
     
     //Convertimos el resultado en array
     $fila= mysqli_fetch_array($res);
