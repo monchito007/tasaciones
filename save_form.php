@@ -81,6 +81,9 @@ $query = "INSERT INTO tasaciones (comunidad_id, provincia_id, municipio_id, dire
         . "VALUES ($select_comunidad, $select_provincia, $select_municipio, '$direccion', $select_tipo_via, $select_tipo_vivienda, $select_viviendas, $metros_reales, $metros_computados, $valor_metro_cuadrado);";
 
 
+//Colocamos el autoincrement en el id que toca.
+set_autoincrement();
+
 //compruebo si las características del archivo son las que deseo
 if (strpos($tipo_archivo, "application/pdf") && ($tamano_archivo < 20000000)){
         echo "La extensión o el tamaño del archivos no es correcta. <br><br><table><tr><td><li>Se permiten archivos .pdf<br><li>se permiten archivos de 10 Mb máximo.</td></tr></table>";
@@ -95,16 +98,22 @@ if (strpos($tipo_archivo, "application/pdf") && ($tamano_archivo < 20000000)){
                 consulta_sql($query);
                 
                 $_SESSION['page']='list.php';
+                
+                //Redrirección Javascript
+                echo '<script type="text/javascript">window.location.href = "content.php";</script>';
+                
+                //El header de php no se puede usar para direccionar una página en cualquier punto. 
+                //Unicamente se puede utilizar si es exactamente la primera salida que se envía, 
+                //si no lo es no funcionará (por tanto no se puede usar en un punto intermedio de una web)
                 header('Location: content.php');
+                die();
                 
         }else{
                 echo utf8_decode("Ocurrió algún error al subir el fichero. No pudo guardarse.");
         }
 } 
 
-
 echo $query;
-
 
 
 ?>

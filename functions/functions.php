@@ -42,6 +42,18 @@ function obtener_num_tasaciones(){
     
 }
 
+function set_autoincrement(){
+    
+    $id = obtener_num_tasaciones();
+    
+    $query = "ALTER TABLE tasaciones AUTO_INCREMENT = ".($id+1);
+    
+    consulta_sql($query);
+    
+    return;    
+    
+}
+
 //Función para obtener el número de registros de la tabla Tasaciones
 function obtener_id_tasacion(){
     
