@@ -14,7 +14,7 @@ function connect_db(){
     }else{
         //echo 'Éxito... ' . mysqli_get_host_info($con) . "\n";
     }
-
+//prueba
     return $con;
 
 }
