@@ -23,7 +23,8 @@ Comentarios:
         if($_SESSION["page"] == "form.php"){echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">';}
         else{echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';}
         ?>
-        <meta http-equiv="Content-Type" content="text/html; iso-8859-1">
+        <!--<meta http-equiv="Content-Type" content="text/html; iso-8859-1">-->
+        <meta http-equiv="content-type" content="text/html; utf-8">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery-3.5.1.min.js"></script>

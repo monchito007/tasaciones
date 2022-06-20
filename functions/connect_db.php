@@ -3,9 +3,9 @@
 function connect_db(){
 
     //Conexión Strato    
-    //$con = mysqli_connect("rdbms.strato.de", "U4340425", "habitatgestions2020", "DB4340425");
+    $con = mysqli_connect("PMYSQL154.dns-servicio.com:3306", "tasaciones", "Pellizquito666*", "9060392_tasaciones");
     //Conexión Localhost
-    $con = mysqli_connect("localhost", "root", "", "tasaciones_db");
+    //$con = mysqli_connect("localhost", "root", "", "tasaciones_db");
 
     //Comprobamos la conexión.
     if (!$con) {

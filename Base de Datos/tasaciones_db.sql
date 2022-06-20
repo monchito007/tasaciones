@@ -1,20 +1,21 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
--- http://www.phpmyadmin.net
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 18-12-2020 a las 10:26:45
--- Versión del servidor: 5.5.24-log
--- Versión de PHP: 5.4.3
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 20-06-2022 a las 14:14:05
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 7.4.25
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de datos: `tasaciones_db`
@@ -26,14 +27,11 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `comunidades`
 --
 
-CREATE TABLE IF NOT EXISTS `comunidades` (
-  `id` int(10) unsigned NOT NULL,
+CREATE TABLE `comunidades` (
+  `id` int(10) UNSIGNED NOT NULL,
   `slug` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `comunidad` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
-  `capital_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `IDX_cominidad` (`comunidad`),
-  UNIQUE KEY `slug` (`slug`)
+  `capital_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -67,17 +65,14 @@ INSERT INTO `comunidades` (`id`, `slug`, `comunidad`, `capital_id`) VALUES
 -- Estructura de tabla para la tabla `municipios`
 --
 
-CREATE TABLE IF NOT EXISTS `municipios` (
-  `provincia_id` int(10) unsigned NOT NULL,
+CREATE TABLE `municipios` (
+  `provincia_id` int(10) UNSIGNED NOT NULL,
   `municipio` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) UNSIGNED NOT NULL,
   `slug` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `latitud` double DEFAULT NULL,
-  `longitud` double DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `IDX_municipio` (`provincia_id`,`municipio`),
-  UNIQUE KEY `slug` (`slug`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=8117 ;
+  `longitud` double DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 CHECKSUM=1 COLLATE=utf8_spanish_ci DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Volcado de datos para la tabla `municipios`
@@ -232,13 +227,13 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (3, 'Alcoleja', 146, 'alcoleja', 38.6754168, -0.3323183),
 (3, 'Alcoy/Alcoi', 147, 'alcoyalcoi', 38.6976276, -0.4730959),
 (3, 'Alfafara', 148, 'alfafara', 38.772663, -0.5552129),
-(3, 'Alfàs del Pi, l''', 149, 'alfs-del-pi-l', 38.5805544, -0.1032094),
+(3, 'Alfàs del Pi, l\'', 149, 'alfs-del-pi-l', 38.5805544, -0.1032094),
 (3, 'Algorfa', 150, 'algorfa', 38.0858671, -0.7957607),
 (3, 'Algueña', 151, 'alguea', 38.3388551, -1.0032342),
 (3, 'Alicante/Alacant', 152, 'alicantealacant', 38.34521, -0.4809945),
 (3, 'Almoradí', 153, 'almorad', 38.109625, -0.7920032),
 (3, 'Almudaina', 154, 'almudaina', 38.7611459, -0.35386),
-(3, 'Alqueria d''Asnar, l''', 155, 'alqueria-dasnar-l', 38.7723463, -0.4256638),
+(3, 'Alqueria d\'Asnar, l\'', 155, 'alqueria-dasnar-l', 38.7723463, -0.4256638),
 (3, 'Altea', 156, 'altea', 38.6003162, -0.0491708),
 (3, 'Aspe', 157, 'aspe', 38.3485684, -0.7694142),
 (3, 'Balones', 158, 'balones', 38.7368262, -0.3420584),
@@ -269,7 +264,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (3, 'Bolulla', 183, 'bolulla', 38.6762156, -0.1117929),
 (3, 'Busot', 184, 'busot', 38.4848258, -0.4172711),
 (3, 'Callosa de Segura', 185, 'callosa-de-segura', 38.1241325, -0.8784829),
-(3, 'Callosa d''En Sarrià', 186, 'callosa-den-sarri', 38.6513245, -0.1225342),
+(3, 'Callosa d\'En Sarrià', 186, 'callosa-den-sarri', 38.6513245, -0.1225342),
 (3, 'Calp', 187, 'calp', 38.6465999, 0.0455365),
 (3, 'Campello, el', 188, 'campello-el', 38.4289188, -0.3978871),
 (3, 'Campo de Mirra', 189, 'campo-de-mirra', 38.686709, -0.7770379),
@@ -304,7 +299,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (3, 'Jávea/Xàbia', 218, 'jveaxbia', 38.7954617, 0.1166293),
 (3, 'Jijona/Xixona', 219, 'jijonaxixona', 38.5400636, -0.5077739),
 (3, 'Llíber', 220, 'llber', 38.7427253, 0.0063282),
-(3, 'Lorcha/Orxa, l''', 221, 'lorchaorxa-l', 38.8430542, -0.309963),
+(3, 'Lorcha/Orxa, l\'', 221, 'lorchaorxa-l', 38.8430542, -0.309963),
 (3, 'Millena', 222, 'millena', 38.7305784, -0.3638289),
 (3, 'Monforte del Cid', 223, 'monforte-del-cid', 38.3792316, -0.7292369),
 (3, 'Monóvar/Monòver', 224, 'monvarmonver', 38.4372058, -0.8393462),
@@ -331,7 +326,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (3, 'Polop', 245, 'polop', 38.6226302, -0.1259112),
 (3, 'Quatretondeta', 246, 'quatretondeta', 38.7236501, -0.3159135),
 (3, 'Rafal', 247, 'rafal', 38.1040219, -0.8499723),
-(3, 'Ràfol d''Almúnia, El', 248, 'rfol-dalmnia-el', 38.8200563, -0.0532798),
+(3, 'Ràfol d\'Almúnia, El', 248, 'rfol-dalmnia-el', 38.8200563, -0.0532798),
 (3, 'Redován', 249, 'redovn', 38.1161641, -0.9107296),
 (3, 'Relleu', 250, 'relleu', 38.5873322, -0.3110441),
 (3, 'Rojales', 251, 'rojales', 38.0883261, -0.7242546),
@@ -343,7 +338,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (3, 'San Miguel de Salinas', 257, 'san-miguel-de-salinas', 37.9799343, -0.7892857),
 (3, 'San Vicente del Raspeig/Sant Vicent del Raspeig', 258, 'san-vicente-del-raspeigsant-vicent-del-raspeig', 38.396093, -0.5249284),
 (3, 'Sanet y Negrals', 259, 'sanet-y-negrals', 38.8199117, -0.0345811),
-(3, 'Sant Joan d''Alacant', 260, 'sant-joan-dalacant', 38.3981693, -0.4345329),
+(3, 'Sant Joan d\'Alacant', 260, 'sant-joan-dalacant', 38.3981693, -0.4345329),
 (3, 'Santa Pola', 261, 'santa-pola', 38.1922952, -0.5552066),
 (3, 'Sax', 262, 'sax', 38.5375665, -0.8180652),
 (3, 'Sella', 263, 'sella', 38.6086174, -0.2730576),
@@ -355,10 +350,10 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (3, 'Tormos', 269, 'tormos', 38.8019487, -0.0721342),
 (3, 'Torremanzanas/Torre de les Maçanes, la', 270, 'torremanzanastorre-de-les-maanes-la', 38.6133511, -0.4199761),
 (3, 'Torrevieja', 271, 'torrevieja', 37.9774712, -0.6832271),
-(3, 'Vall d''Alcalà, la', 272, 'vall-dalcal-la', 38.7944444, -0.2527778),
+(3, 'Vall d\'Alcalà, la', 272, 'vall-dalcal-la', 38.7944444, -0.2527778),
 (3, 'Vall de Gallinera', 273, 'vall-de-gallinera', 38.8222222, -0.2222222),
 (3, 'Vall de Laguar, la', 274, 'vall-de-laguar-la', 38.3464283, -0.5128954),
-(3, 'Vall d''Ebo, la', 275, 'vall-debo-la', 38.3638517, -0.4806877),
+(3, 'Vall d\'Ebo, la', 275, 'vall-debo-la', 38.3638517, -0.4806877),
 (3, 'Verger, el', 276, 'verger-el', 38.3310916, -0.5109846),
 (3, 'Villajoyosa/Vila Joiosa, la', 277, 'villajoyosavila-joiosa-la', 38.5261833, -0.1981858),
 (3, 'Villena', 278, 'villena', 38.6363457, -0.8661389),
@@ -864,11 +859,11 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (6, 'Valverde de Llerena', 778, 'valverde-de-llerena', 38.2137564, -5.8220835),
 (6, 'Valverde de Mérida', 779, 'valverde-de-mrida', 38.9117614, -6.2216049),
 (6, 'Villafranca de los Barros', 780, 'villafranca-de-los-barros', 38.5623014, -6.3378315),
-(6, 'Villagarcía de la Torre', 781, 'villagarca-de-la-torre', 38.2938724, -6.0805687);
-INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
+(6, 'Villagarcía de la Torre', 781, 'villagarca-de-la-torre', 38.2938724, -6.0805687),
 (6, 'Villagonzalo', 782, 'villagonzalo', 38.8630855, -6.1969412),
 (6, 'Villalba de los Barros', 783, 'villalba-de-los-barros', 38.6129134, -6.509777),
-(6, 'Villanueva de la Serena', 784, 'villanueva-de-la-serena', 38.9739883, -5.8003017),
+(6, 'Villanueva de la Serena', 784, 'villanueva-de-la-serena', 38.9739883, -5.8003017);
+INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
 (6, 'Villanueva del Fresno', 785, 'villanueva-del-fresno', 38.3759716, -7.1689925),
 (6, 'Villar de Rena', 786, 'villar-de-rena', 39.0766913, -5.8117789),
 (6, 'Villar del Rey', 787, 'villar-del-rey', 39.1323927, -6.8477959),
@@ -950,7 +945,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (8, 'Aiguafreda', 863, 'aiguafreda', 41.7688352, 2.2502611),
 (8, 'Alella', 864, 'alella', 41.4939555, 2.295461),
 (8, 'Alpens', 865, 'alpens', 42.1201015, 2.1013627),
-(8, 'Ametlla del Vallès, L''', 866, 'ametlla-del-valls-l', 41.6697592, 2.261185),
+(8, 'Ametlla del Vallès, L\'', 866, 'ametlla-del-valls-l', 41.6697592, 2.261185),
 (8, 'Arenys de Mar', 867, 'arenys-de-mar', 41.579445, 2.5514795),
 (8, 'Arenys de Munt', 868, 'arenys-de-munt', 41.6102603, 2.5413762),
 (8, 'Argençola', 869, 'argenola', 41.5996648, 1.4434103),
@@ -974,13 +969,13 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (8, 'Bruc, El', 887, 'bruc-el', 41.3941612, 2.1697712),
 (8, 'Brull, El', 888, 'brull-el', 41.8167689, 2.305493),
 (8, 'Cabanyes, Les', 889, 'cabanyes-les', 41.3728896, 2.164754),
-(8, 'Cabrera d''Anoia', 890, 'cabrera-danoia', 41.4794444, 1.7047222),
+(8, 'Cabrera d\'Anoia', 890, 'cabrera-danoia', 41.4794444, 1.7047222),
 (8, 'Cabrera de Mar', 891, 'cabrera-de-mar', 41.5262336, 2.3935324),
 (8, 'Cabrils', 892, 'cabrils', 41.5255257, 2.3686452),
 (8, 'Calaf', 893, 'calaf', 41.7334187, 1.5134983),
 (8, 'Calders', 894, 'calders', 41.7922652, 1.996567),
 (8, 'Caldes de Montbui', 895, 'caldes-de-montbui', 41.6297554, 2.1659222),
-(8, 'Caldes d''Estrac', 896, 'caldes-destrac', 41.569457, 2.5263181),
+(8, 'Caldes d\'Estrac', 896, 'caldes-destrac', 41.569457, 2.5263181),
 (8, 'Calella', 897, 'calella', 41.613405, 2.6573645),
 (8, 'Calldetenes', 898, 'calldetenes', 41.9252254, 2.2837921),
 (8, 'Callús', 899, 'calls', 41.7810889, 1.7840075),
@@ -996,8 +991,8 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (8, 'Cardona', 909, 'cardona', 41.9139171, 1.6813476),
 (8, 'Carme', 910, 'carme', 41.5312599, 1.6234864),
 (8, 'Casserres', 911, 'casserres', 42.012335, 1.8458337),
-(8, 'Castell de l''Areny', 912, 'castell-de-lareny', 42.1731838, 1.9457532),
-(8, 'Castellar de n''Hug', 913, 'castellar-de-nhug', 42.2832573, 2.016574),
+(8, 'Castell de l\'Areny', 912, 'castell-de-lareny', 42.1731838, 1.9457532),
+(8, 'Castellar de n\'Hug', 913, 'castellar-de-nhug', 42.2832573, 2.016574),
 (8, 'Castellar del Riu', 914, 'castellar-del-riu', 42.122838, 1.772439),
 (8, 'Castellar del Vallès', 915, 'castellar-del-valls', 41.6161765, 2.0856496),
 (8, 'Castellbell i el Vilar', 916, 'castellbell-i-el-vilar', 41.6338889, 1.8638889),
@@ -1026,8 +1021,8 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (8, 'Dosrius', 939, 'dosrius', 41.5948187, 2.4053859),
 (8, 'Esparreguera', 940, 'esparreguera', 41.5388887, 1.8706916),
 (8, 'Esplugues de Llobregat', 941, 'esplugues-de-llobregat', 41.3775143, 2.0880846),
-(8, 'Espunyola, L''', 942, 'espunyola-l', 42.0522182, 1.7732401),
-(8, 'Estany, L''', 943, 'estany-l', 41.868577, 2.1134993),
+(8, 'Espunyola, L\'', 942, 'espunyola-l', 42.0522182, 1.7732401),
+(8, 'Estany, L\'', 943, 'estany-l', 41.868577, 2.1134993),
 (8, 'Figaró-Montmany', 944, 'figar-montmany', 41.7216907, 2.2731136),
 (8, 'Fígols', 945, 'fgols', 42.180901, 1.8360817),
 (8, 'Fogars de la Selva', 946, 'fogars-de-la-selva', 41.7253879, 2.6735662),
@@ -1049,13 +1044,13 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (8, 'Gualba', 962, 'gualba', 41.7314517, 2.5027259),
 (8, 'Guardiola de Berguedà', 963, 'guardiola-de-bergued', 42.233446, 1.8791111),
 (8, 'Gurb', 964, 'gurb', 41.9539412, 2.2355453),
-(8, 'Hospitalet de Llobregat, L''', 965, 'hospitalet-de-llobregat-l', 41.3595829, 2.0997037),
+(8, 'Hospitalet de Llobregat, L\'', 965, 'hospitalet-de-llobregat-l', 41.3595829, 2.0997037),
 (8, 'Hostalets de Pierola, Els', 966, 'hostalets-de-pierola-els', 41.5341644, 1.7659521),
 (8, 'Igualada', 967, 'igualada', 41.5787648, 1.6171926),
 (8, 'Jorba', 968, 'jorba', 41.6004892, 1.5461948),
 (8, 'Llacuna, La', 969, 'llacuna-la', 41.3991277, 2.1975859),
 (8, 'Llagosta, La', 970, 'llagosta-la', 41.5132133, 2.1932462),
-(8, 'Lliçà d''Amunt', 971, 'lli-damunt', 41.6086446, 2.2394426),
+(8, 'Lliçà d\'Amunt', 971, 'lli-damunt', 41.6086446, 2.2394426),
 (8, 'Lliçà de Vall', 972, 'lli-de-vall', 41.5908073, 2.2427331),
 (8, 'Llinars del Vallès', 973, 'llinars-del-valls', 41.6393529, 2.404427),
 (8, 'Lluçà', 974, 'llu', 42.0504846, 2.0350426),
@@ -1168,9 +1163,9 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (8, 'Sant Julià de Cerdanyola', 1081, 'sant-juli-de-cerdanyola', 42.2230555, 1.8911192),
 (8, 'Sant Julià de Vilatorta', 1082, 'sant-juli-de-vilatorta', 41.9223129, 2.3243507),
 (8, 'Sant Just Desvern', 1083, 'sant-just-desvern', 41.3857565, 2.0755444),
-(8, 'Sant Llorenç d''Hortons', 1084, 'sant-lloren-dhortons', 41.4648528, 1.8243985),
+(8, 'Sant Llorenç d\'Hortons', 1084, 'sant-lloren-dhortons', 41.4648528, 1.8243985),
 (8, 'Sant Llorenç Savall', 1085, 'sant-lloren-savall', 41.6798221, 2.0593104),
-(8, 'Sant Martí d''Albars', 1086, 'sant-mart-dalbars', 42.0282428, 2.0737587),
+(8, 'Sant Martí d\'Albars', 1086, 'sant-mart-dalbars', 42.0282428, 2.0737587),
 (8, 'Sant Martí de Centelles', 1087, 'sant-mart-de-centelles', 41.7663251, 2.2048198),
 (8, 'Sant Martí de Tous', 1088, 'sant-mart-de-tous', 41.5621392, 1.5229336),
 (8, 'Sant Martí Sarroca', 1089, 'sant-mart-sarroca', 41.3857783, 1.6114233),
@@ -1186,8 +1181,8 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (8, 'Sant Quirze de Besora', 1099, 'sant-quirze-de-besora', 42.1009408, 2.2166109),
 (8, 'Sant Quirze del Vallès', 1100, 'sant-quirze-del-valls', 41.5308004, 2.086581),
 (8, 'Sant Quirze Safaja', 1101, 'sant-quirze-safaja', 41.7273232, 2.1530632),
-(8, 'Sant Sadurní d''Anoia', 1102, 'sant-sadurn-danoia', 41.4253476, 1.7856727),
-(8, 'Sant Sadurní d''Osormort', 1103, 'sant-sadurn-dosormort', 41.9032055, 2.3814482),
+(8, 'Sant Sadurní d\'Anoia', 1102, 'sant-sadurn-danoia', 41.4253476, 1.7856727),
+(8, 'Sant Sadurní d\'Osormort', 1103, 'sant-sadurn-dosormort', 41.9032055, 2.3814482),
 (8, 'Sant Salvador de Guardiola', 1104, 'sant-salvador-de-guardiola', 41.6805976, 1.7671247),
 (8, 'Sant Vicenç de Castellet', 1105, 'sant-vicen-de-castellet', 41.6658042, 1.8638493),
 (8, 'Sant Vicenç de Montalt', 1106, 'sant-vicen-de-montalt', 41.5826242, 2.5099261),
@@ -1208,7 +1203,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (8, 'Santa Maria de Merlès', 1121, 'santa-maria-de-merls', 42.0010993, 1.9777909),
 (8, 'Santa Maria de Miralles', 1122, 'santa-maria-de-miralles', 41.5181315, 1.5251288),
 (8, 'Santa Maria de Palautordera', 1123, 'santa-maria-de-palautordera', 41.693195, 2.4462271),
-(8, 'Santa Maria d''Oló', 1124, 'santa-maria-dol', 41.8720736, 2.0352909),
+(8, 'Santa Maria d\'Oló', 1124, 'santa-maria-dol', 41.8720736, 2.0352909),
 (8, 'Santa Perpètua de Mogoda', 1125, 'santa-perptua-de-mogoda', 41.5348637, 2.1789883),
 (8, 'Santa Susanna', 1126, 'santa-susanna', 41.6406938, 2.7168714),
 (8, 'Santpedor', 1127, 'santpedor', 41.7835681, 1.8391293),
@@ -1236,7 +1231,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (8, 'Torrelles de Llobregat', 1149, 'torrelles-de-llobregat', 41.3538882, 1.9766603),
 (8, 'Ullastrell', 1150, 'ullastrell', 41.5270691, 1.9569313),
 (8, 'Vacarisses', 1151, 'vacarisses', 41.6062684, 1.9191586),
-(8, 'Vallbona d''Anoia', 1152, 'vallbona-danoia', 41.519616, 1.7089358),
+(8, 'Vallbona d\'Anoia', 1152, 'vallbona-danoia', 41.519616, 1.7089358),
 (8, 'Vallcebre', 1153, 'vallcebre', 42.2039401, 1.8182345),
 (8, 'Vallgorguina', 1154, 'vallgorguina', 41.6483215, 2.509912),
 (8, 'Vallirana', 1155, 'vallirana', 41.3887185, 1.932255),
@@ -1600,14 +1595,14 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (9, 'Villamayor de los Montes', 1513, 'villamayor-de-los-montes', 42.1057626, -3.7662671),
 (9, 'Villamayor de Treviño', 1514, 'villamayor-de-trevio', 42.4595034, -4.119967),
 (9, 'Villambistia', 1515, 'villambistia', 42.4063123, -3.2621684),
-(9, 'Villamedianilla', 1516, 'villamedianilla', 42.1606322, -4.1463624);
-INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
+(9, 'Villamedianilla', 1516, 'villamedianilla', 42.1606322, -4.1463624),
 (9, 'Villamiel de la Sierra', 1517, 'villamiel-de-la-sierra', 42.1916422, -3.4175903),
 (9, 'Villangómez', 1518, 'villangmez', 42.1788155, -3.7762082),
 (9, 'Villanueva de Argaño', 1519, 'villanueva-de-argao', 42.3798981, -3.9329704),
 (9, 'Villanueva de Carazo', 1520, 'villanueva-de-carazo', 41.9832316, -3.3244807),
 (9, 'Villanueva de Gumiel', 1521, 'villanueva-de-gumiel', 41.7372353, -3.6263476),
-(9, 'Villanueva de Teba', 1522, 'villanueva-de-teba', 42.6491308, -3.162595),
+(9, 'Villanueva de Teba', 1522, 'villanueva-de-teba', 42.6491308, -3.162595);
+INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
 (9, 'Villaquirán de la Puebla', 1523, 'villaquirn-de-la-puebla', 42.2832011, -4.1015573),
 (9, 'Villaquirán de los Infantes', 1524, 'villaquirn-de-los-infantes', 42.2271495, -4.0084589),
 (9, 'Villarcayo de Merindad de Castilla la Vieja', 1525, 'villarcayo-de-merindad-de-castilla-la-vieja', 42.9383037, -3.5729847),
@@ -1896,7 +1891,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (12, 'Aín', 1808, 'an', 39.9008615, -0.3407996),
 (12, 'Albocàsser', 1809, 'albocsser', 40.3562617, 0.0253618),
 (12, 'Alcalà de Xivert', 1810, 'alcal-de-xivert', 40.3045872, 0.2263053),
-(12, 'Alcora, l''', 1811, 'alcora-l', 40.0727808, -0.2130235),
+(12, 'Alcora, l\'', 1811, 'alcora-l', 40.0727808, -0.2130235),
 (12, 'Alcudia de Veo', 1812, 'alcudia-de-veo', 39.9171286, -0.3556332),
 (12, 'Alfondeguilla', 1813, 'alfondeguilla', 39.8372449, -0.26879),
 (12, 'Algimia de Almonacid', 1814, 'algimia-de-almonacid', 39.9143303, -0.4434568),
@@ -2002,19 +1997,19 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (12, 'Torás', 1914, 'tors', 39.9196212, -0.6867329),
 (12, 'Toro, El', 1915, 'toro-el', 39.9671987, -0.0537832),
 (12, 'Torralba del Pinar', 1916, 'torralba-del-pinar', 39.9884637, -0.4384301),
-(12, 'Torre d''En Besora, la', 1917, 'torre-den-besora-la', 39.9818553, -0.0720973),
-(12, 'Torre d''en Doménec, la', 1918, 'torre-den-domnec-la', 40.263887, 0.069759),
+(12, 'Torre d\'En Besora, la', 1917, 'torre-den-besora-la', 39.9818553, -0.0720973),
+(12, 'Torre d\'en Doménec, la', 1918, 'torre-den-domnec-la', 40.263887, 0.069759),
 (12, 'Torreblanca', 1919, 'torreblanca', 40.2202416, 0.1955926),
 (12, 'Torrechiva', 1920, 'torrechiva', 40.0498, -0.3971934),
 (12, 'Traiguera', 1921, 'traiguera', 40.5250187, 0.2937722),
 (12, 'Useras/Useres, les', 1922, 'userasuseres-les', 40.2273505, -0.080291),
-(12, 'Vall d''Alba', 1923, 'vall-dalba', 40.1751225, -0.0346116),
+(12, 'Vall d\'Alba', 1923, 'vall-dalba', 40.1751225, -0.0346116),
 (12, 'Vall de Almonacid', 1924, 'vall-de-almonacid', 39.9032296, -0.4562645),
-(12, 'Vall d''Uixó, la', 1925, 'vall-duix-la', 39.8233311, -0.2325619),
+(12, 'Vall d\'Uixó, la', 1925, 'vall-duix-la', 39.8233311, -0.2325619),
 (12, 'Vallat', 1926, 'vallat', 40.0296366, -0.3364323),
 (12, 'Vallibona', 1927, 'vallibona', 40.6029483, 0.0462348),
 (12, 'Vilafamés', 1928, 'vilafams', 40.1140237, -0.0529811),
-(12, 'Vilanova d''Alcolea', 1929, 'vilanova-dalcolea', 40.2316931, 0.0736209),
+(12, 'Vilanova d\'Alcolea', 1929, 'vilanova-dalcolea', 40.2316931, 0.0736209),
 (12, 'Vilar de Canes', 1930, 'vilar-de-canes', 40.3588518, -0.06521),
 (12, 'Vila-real', 1931, 'vila-real', 39.9383537, -0.1018287),
 (12, 'Vilavella, la', 1932, 'vilavella-la', 39.989765, -0.0298084),
@@ -2354,8 +2349,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (16, 'Cardenete', 2266, 'cardenete', 39.7666475, -1.6929809),
 (16, 'Carrascosa', 2267, 'carrascosa', 40.5906917, -2.1629889),
 (16, 'Carrascosa de Haro', 2268, 'carrascosa-de-haro', 39.5982336, -2.5430773),
-(16, 'Casas de Benítez', 2269, 'casas-de-bentez', 39.3613267, -2.1309316);
-INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
+(16, 'Casas de Benítez', 2269, 'casas-de-bentez', 39.3613267, -2.1309316),
 (16, 'Casas de Fernando Alonso', 2270, 'casas-de-fernando-alonso', 39.3505341, -2.3293368),
 (16, 'Casas de Garcimolina', 2271, 'casas-de-garcimolina', 39.9968409, -1.4173509),
 (16, 'Casas de Guijarro', 2272, 'casas-de-guijarro', 39.3444863, -2.1628124),
@@ -2364,7 +2358,8 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (16, 'Casasimarro', 2275, 'casasimarro', 39.3907063, -2.0366069),
 (16, 'Castejón', 2276, 'castejn', 40.3822778, -2.5198475),
 (16, 'Castillejo de Iniesta', 2277, 'castillejo-de-iniesta', 39.5258204, -1.7613109),
-(16, 'Castillejo-Sierra', 2278, 'castillejo-sierra', 40.3756427, -2.1406038),
+(16, 'Castillejo-Sierra', 2278, 'castillejo-sierra', 40.3756427, -2.1406038);
+INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
 (16, 'Castillo de Garcimuñoz', 2279, 'castillo-de-garcimuoz', 39.6604012, -2.3799936),
 (16, 'Castillo-Albaráñez', 2280, 'castillo-albarez', 40.298704, -2.3924593),
 (16, 'Cervera del Llano', 2281, 'cervera-del-llano', 39.7823574, -2.4227506),
@@ -2547,16 +2542,16 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (17, 'Anglès', 2458, 'angls', 41.9551485, 2.6382786),
 (17, 'Arbúcies', 2459, 'arbcies', 41.8170542, 2.5143682),
 (17, 'Argelaguer', 2460, 'argelaguer', 42.2160834, 2.641481),
-(17, 'Armentera, L''', 2461, 'armentera-l', 42.1712275, 3.0745244),
+(17, 'Armentera, L\'', 2461, 'armentera-l', 42.1712275, 3.0745244),
 (17, 'Avinyonet de Puigventós', 2462, 'avinyonet-de-puigvents', 42.2505068, 2.9133063),
 (17, 'Banyoles', 2463, 'banyoles', 42.1181191, 2.7647475),
 (17, 'Bàscara', 2464, 'bscara', 42.1571523, 2.9106383),
 (17, 'Begur', 2465, 'begur', 41.9537345, 3.2081359),
-(17, 'Bellcaire d''Empordà', 2466, 'bellcaire-dempord', 42.0792237, 3.0960791),
+(17, 'Bellcaire d\'Empordà', 2466, 'bellcaire-dempord', 42.0792237, 3.0960791),
 (17, 'Besalú', 2467, 'besal', 42.2003846, 2.6986627),
 (17, 'Bescanó', 2468, 'bescan', 41.9662373, 2.7393957),
 (17, 'Beuda', 2469, 'beuda', 42.236985, 2.7097201),
-(17, 'Bisbal d''Empordà, La', 2470, 'bisbal-dempord-la', 41.9602172, 3.0401845),
+(17, 'Bisbal d\'Empordà, La', 2470, 'bisbal-dempord-la', 41.9602172, 3.0401845),
 (17, 'Biure', 2471, 'biure', 42.3366528, 2.8965108),
 (17, 'Blanes', 2472, 'blanes', 41.6742668, 2.7920964),
 (17, 'Boadella i les Escaules', 2473, 'boadella-i-les-escaules', 42.3313889, 2.8569444),
@@ -2575,13 +2570,13 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (17, 'Campelles', 2486, 'campelles', 42.2956897, 2.1400318),
 (17, 'Campllong', 2487, 'campllong', 41.8964695, 2.8322704),
 (17, 'Camprodon', 2488, 'camprodon', 42.3128269, 2.3649985),
-(17, 'Canet d''Adri', 2489, 'canet-dadri', 42.0335212, 2.7371735),
+(17, 'Canet d\'Adri', 2489, 'canet-dadri', 42.0335212, 2.7371735),
 (17, 'Cantallops', 2490, 'cantallops', 42.4197724, 2.9241929),
 (17, 'Capmany', 2491, 'capmany', 42.3719481, 2.9221224),
 (17, 'Cassà de la Selva', 2492, 'cass-de-la-selva', 41.8877419, 2.8750854),
 (17, 'Castellfollit de la Roca', 2493, 'castellfollit-de-la-roca', 42.219131, 2.5500767),
-(17, 'Castelló d''Empúries', 2494, 'castell-dempries', 42.2582587, 3.0744421),
-(17, 'Castell-Platja d''Aro', 2495, 'castell-platja-daro', 41.8180033, 3.0670057),
+(17, 'Castelló d\'Empúries', 2494, 'castell-dempries', 42.2582587, 3.0744421),
+(17, 'Castell-Platja d\'Aro', 2495, 'castell-platja-daro', 41.8180033, 3.0670057),
 (17, 'Cellera de Ter, La', 2496, 'cellera-de-ter-la', 41.9705806, 2.6204211),
 (17, 'Celrà', 2497, 'celr', 42.0246182, 2.8789672),
 (17, 'Cervià de Ter', 2498, 'cervi-de-ter', 42.0661779, 2.9104947),
@@ -2591,14 +2586,14 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (17, 'Corçà', 2502, 'cor', 41.9878924, 3.0157618),
 (17, 'Cornellà del Terri', 2503, 'cornell-del-terri', 42.0891524, 2.8161389),
 (17, 'Crespià', 2504, 'crespi', 42.1870701, 2.7999213),
-(17, 'Cruïlles, Monells i Sant Sadurní de l''Heura', 2505, 'crulles-monells-i-sant-sadurn-de-lheura', 41.9546876, 2.9917942),
+(17, 'Cruïlles, Monells i Sant Sadurní de l\'Heura', 2505, 'crulles-monells-i-sant-sadurn-de-lheura', 41.9546876, 2.9917942),
 (17, 'Darnius', 2506, 'darnius', 42.3660008, 2.8347492),
 (17, 'Das', 2507, 'das', 42.3619798, 1.8706233),
-(17, 'Escala, L''', 2508, 'escala-l', 42.1247845, 3.1323963),
+(17, 'Escala, L\'', 2508, 'escala-l', 42.1247845, 3.1323963),
 (17, 'Espinelves', 2509, 'espinelves', 41.8676424, 2.4177108),
 (17, 'Espolla', 2510, 'espolla', 42.3897024, 3.0016038),
 (17, 'Esponellà', 2511, 'esponell', 42.1778091, 2.7970314),
-(17, 'Far d''Empordà, El', 2512, 'far-dempord-el', 42.2521289, 2.9953019),
+(17, 'Far d\'Empordà, El', 2512, 'far-dempord-el', 42.2521289, 2.9953019),
 (17, 'Figueres', 2513, 'figueres', 42.2674977, 2.9608395),
 (17, 'Flaçà', 2514, 'fla', 42.0503273, 2.9540669),
 (17, 'Foixà', 2515, 'foix', 42.0390829, 2.9979183),
@@ -2660,7 +2655,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (17, 'Pedret i Marzà', 2571, 'pedret-i-marz', 42.3104846, 3.0680864),
 (17, 'Pera, La', 2572, 'pera-la', 42.0212379, 2.9729454),
 (17, 'Peralada', 2573, 'peralada', 42.3079643, 3.0104516),
-(17, 'Planes d''Hostoles, Les', 2574, 'planes-dhostoles-les', 42.0568998, 2.5401197),
+(17, 'Planes d\'Hostoles, Les', 2574, 'planes-dhostoles-les', 42.0568998, 2.5401197),
 (17, 'Planoles', 2575, 'planoles', 42.3160941, 2.1028005),
 (17, 'Pont de Molins', 2576, 'pont-de-molins', 42.3139539, 2.9289855),
 (17, 'Pontós', 2577, 'ponts', 42.1867106, 2.9165595),
@@ -2709,8 +2704,8 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (17, 'Sant Pau de Segúries', 2620, 'sant-pau-de-segries', 42.261632, 2.3659316),
 (17, 'Sant Pere Pescador', 2621, 'sant-pere-pescador', 42.1879607, 3.0823525),
 (17, 'Santa Coloma de Farners', 2622, 'santa-coloma-de-farners', 41.8608081, 2.6677718),
-(17, 'Santa Cristina d''Aro', 2623, 'santa-cristina-daro', 41.815661, 3.0029273),
-(17, 'Santa Llogaia d''Àlguema', 2624, 'santa-llogaia-dlguema', 42.2343901, 2.9519058),
+(17, 'Santa Cristina d\'Aro', 2623, 'santa-cristina-daro', 41.815661, 3.0029273),
+(17, 'Santa Llogaia d\'Àlguema', 2624, 'santa-llogaia-dlguema', 42.2343901, 2.9519058),
 (17, 'Santa Pau', 2625, 'santa-pau', 42.1463813, 2.5693236),
 (17, 'Sarrià de Ter', 2626, 'sarri-de-ter', 42.0144577, 2.824395),
 (17, 'Saus, Camallera i Llampaies', 2627, 'saus-camallera-i-llampaies', 42.1226021, 2.9619041),
@@ -2721,7 +2716,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (17, 'Sils', 2632, 'sils', 41.809169, 2.7434662),
 (17, 'Siurana', 2633, 'siurana', 42.2093486, 2.994269),
 (17, 'Susqueda', 2634, 'susqueda', 41.9833333, 2.5166667),
-(17, 'Tallada d''Empordà, La', 2635, 'tallada-dempord-la', 42.0800172, 3.0567727),
+(17, 'Tallada d\'Empordà, La', 2635, 'tallada-dempord-la', 42.0800172, 3.0567727),
 (17, 'Terrades', 2636, 'terrades', 42.310355, 2.8396452),
 (17, 'Torrent', 2637, 'torrent', 41.9524572, 3.1283895),
 (17, 'Torroella de Fluvià', 2638, 'torroella-de-fluvi', 42.1755679, 3.039541),
@@ -2735,7 +2730,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (17, 'Urús', 2646, 'urs', 42.3503873, 1.852658),
 (17, 'Vajol, La', 2647, 'vajol-la', 42.4043984, 2.799725),
 (17, 'Vall de Bianya, La', 2648, 'vall-de-bianya-la', 42.2393184, 2.4230261),
-(17, 'Vall d''en Bas, La', 2649, 'vall-den-bas-la', 42.1183552, 2.4570012),
+(17, 'Vall d\'en Bas, La', 2649, 'vall-den-bas-la', 42.1183552, 2.4570012),
 (17, 'Vallfogona de Ripollès', 2650, 'vallfogona-de-ripolls', 42.1963858, 2.3033393),
 (17, 'Vall-llobrega', 2651, 'vall-llobrega', 41.883714, 3.1213646),
 (17, 'Ventalló', 2652, 'ventall', 42.1495792, 3.0263049),
@@ -2757,7 +2752,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (17, 'Vilanant', 2668, 'vilanant', 42.2545457, 2.8897835),
 (17, 'Vila-sacra', 2669, 'vila-sacra', 42.2646479, 3.0165578),
 (17, 'Vilaür', 2670, 'vilar', 42.1433975, 2.9554401),
-(17, 'Vilobí d''Onyar', 2671, 'vilob-donyar', 41.8875235, 2.7399021),
+(17, 'Vilobí d\'Onyar', 2671, 'vilob-donyar', 41.8875235, 2.7399021),
 (17, 'Vilopriu', 2672, 'vilopriu', 42.1039579, 2.9930082),
 (18, 'Agrón', 2673, 'agrn', 37.0305837, -3.8297243),
 (18, 'Alamedilla', 2674, 'alamedilla', 37.5817402, -3.2443093),
@@ -3128,8 +3123,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (19, 'Retiendas', 3039, 'retiendas', 40.9709071, -3.2750912),
 (19, 'Riba de Saelices', 3040, 'riba-de-saelices', 40.9121669, -2.2971114),
 (19, 'Rillo de Gallo', 3041, 'rillo-de-gallo', 40.8662534, -1.937551),
-(19, 'Riofrío del Llano', 3042, 'riofro-del-llano', 41.1378158, -2.8246483);
-INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
+(19, 'Riofrío del Llano', 3042, 'riofro-del-llano', 41.1378158, -2.8246483),
 (19, 'Robledillo de Mohernando', 3043, 'robledillo-de-mohernando', 40.8539985, -3.2347475),
 (19, 'Robledo de Corpes', 3044, 'robledo-de-corpes', 41.1181471, -2.9504815),
 (19, 'Romanillos de Atienza', 3045, 'romanillos-de-atienza', 41.2749213, -2.8959309),
@@ -3142,7 +3136,8 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (19, 'San Andrés del Congosto', 3052, 'san-andrs-del-congosto', 40.9997411, -3.0267567),
 (19, 'San Andrés del Rey', 3053, 'san-andrs-del-rey', 40.6380323, -2.81983),
 (19, 'Santiuste', 3054, 'santiuste', 41.0846128, -2.8090556),
-(19, 'Saúca', 3055, 'saca', 41.0306793, -2.5294746),
+(19, 'Saúca', 3055, 'saca', 41.0306793, -2.5294746);
+INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
 (19, 'Sayatón', 3056, 'sayatn', 40.376728, -2.8514314),
 (19, 'Selas', 3057, 'selas', 40.9512305, -2.1031906),
 (19, 'Semillas', 3058, 'semillas', 41.059333, -3.1186471),
@@ -3894,16 +3889,15 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (24, 'Villazanzo de Valderaduey', 3804, 'villazanzo-de-valderaduey', 42.5350408, -4.9636822),
 (24, 'Zotes del Páramo', 3805, 'zotes-del-pramo', 42.2720215, -5.7359581),
 (25, 'Abella de la Conca', 3806, 'abella-de-la-conca', 42.1610657, 1.0897641),
-(25, 'Àger', 3807, '3807-ger', 42.0028246, 0.7643949);
-INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
+(25, 'Àger', 3807, '3807-ger', 42.0028246, 0.7643949),
 (25, 'Agramunt', 3808, 'agramunt', 41.7861117, 1.0988114),
 (25, 'Aitona', 3809, 'aitona', 41.4957636, 0.4597391),
 (25, 'Alamús, Els', 3810, 'alams-els', 41.6160974, 0.7375647),
 (25, 'Alàs i Cerc', 3811, 'als-i-cerc', 42.3515746, 1.5050765),
-(25, 'Albagés, L''', 3812, 'albags-l', 41.4480967, 0.7388024),
+(25, 'Albagés, L\'', 3812, 'albags-l', 41.4480967, 0.7388024),
 (25, 'Albatàrrec', 3813, 'albatrrec', 41.5729903, 0.6057172),
 (25, 'Albesa', 3814, 'albesa', 41.7519835, 0.6582234),
-(25, 'Albi, L''', 3815, 'albi-l', 41.4251737, 0.9378923),
+(25, 'Albi, L\'', 3815, 'albi-l', 41.4251737, 0.9378923),
 (25, 'Alcanó', 3816, 'alcan', 41.4808447, 0.6179771),
 (25, 'Alcarràs', 3817, 'alcarrs', 41.5661386, 0.530272),
 (25, 'Alcoletge', 3818, 'alcoletge', 41.6490929, 0.6945253),
@@ -3914,7 +3908,8 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (25, 'Alins', 3823, 'alins', 42.5492769, 1.3174852),
 (25, 'Almacelles', 3824, 'almacelles', 41.7310149, 0.4377279),
 (25, 'Almatret', 3825, 'almatret', 41.3052594, 0.4244163),
-(25, 'Almenar', 3826, 'almenar', 41.7955173, 0.5701049),
+(25, 'Almenar', 3826, 'almenar', 41.7955173, 0.5701049);
+INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
 (25, 'Alòs de Balaguer', 3827, 'als-de-balaguer', 41.9118727, 0.9600118),
 (25, 'Alpicat', 3828, 'alpicat', 41.6671144, 0.5552974),
 (25, 'Alt Àneu', 3829, 'alt-neu', 42.635288, 1.107489),
@@ -3934,9 +3929,9 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (25, 'Bausen', 3843, 'bausen', 42.834485, 0.7167327),
 (25, 'Belianes', 3844, 'belianes', 41.5591185, 1.0162851),
 (25, 'Bellaguarda', 3845, 'bellaguarda', 41.336977, 0.7346494),
-(25, 'Bellcaire d''Urgell', 3846, 'bellcaire-durgell', 41.7574714, 0.9065079),
-(25, 'Bell-lloc d''Urgell', 3847, 'bell-lloc-durgell', 41.6294011, 0.7808905),
-(25, 'Bellmunt d''Urgell', 3848, 'bellmunt-durgell', 41.7727039, 0.9525583),
+(25, 'Bellcaire d\'Urgell', 3846, 'bellcaire-durgell', 41.7574714, 0.9065079),
+(25, 'Bell-lloc d\'Urgell', 3847, 'bell-lloc-durgell', 41.6294011, 0.7808905),
+(25, 'Bellmunt d\'Urgell', 3848, 'bellmunt-durgell', 41.7727039, 0.9525583),
 (25, 'Bellpuig', 3849, 'bellpuig', 41.6260709, 1.0092164),
 (25, 'Bellver de Cerdanya', 3850, 'bellver-de-cerdanya', 42.3701531, 1.7782706),
 (25, 'Bellvís', 3851, 'bellvs', 41.6734901, 0.8210204),
@@ -3967,11 +3962,11 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (25, 'Conca de Dalt', 3876, 'conca-de-dalt', 42.2461111, 0.9730556),
 (25, 'Corbins', 3877, 'corbins', 41.690995, 0.6974681),
 (25, 'Cubells', 3878, 'cubells', 41.8531252, 0.9575363),
-(25, 'Espluga Calba, L''', 3879, 'espluga-calba-l', 41.4962775, 1.0049311),
+(25, 'Espluga Calba, L\'', 3879, 'espluga-calba-l', 41.4962775, 1.0049311),
 (25, 'Espot', 3880, 'espot', 42.5758404, 1.0889141),
 (25, 'Estamariu', 3881, 'estamariu', 42.3740032, 1.5240454),
 (25, 'Estaràs', 3882, 'estars', 41.6912997, 1.3777921),
-(25, 'Esterri d''Àneu', 3883, 'esterri-dneu', 42.628862, 1.1233575),
+(25, 'Esterri d\'Àneu', 3883, 'esterri-dneu', 42.628862, 1.1233575),
 (25, 'Esterri de Cardós', 3884, 'esterri-de-cards', 42.5924117, 1.2622141),
 (25, 'Farrera', 3885, 'farrera', 42.4973176, 1.2712957),
 (25, 'Fígols i Alinyà', 3886, 'fgols-i-aliny', 42.2031586, 1.3400016),
@@ -3985,17 +3980,17 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (25, 'Golmés', 3894, 'golms', 41.6312698, 0.9324688),
 (25, 'Gósol', 3895, 'gsol', 42.2369978, 1.6603249),
 (25, 'Granadella, La', 3896, 'granadella-la', 41.3567187, 0.6658524),
-(25, 'Granja d''Escarp, La', 3897, 'granja-descarp-la', 41.4186052, 0.3525815),
+(25, 'Granja d\'Escarp, La', 3897, 'granja-descarp-la', 41.4186052, 0.3525815),
 (25, 'Granyanella', 3898, 'granyanella', 41.6477207, 1.2235292),
 (25, 'Granyena de les Garrigues', 3899, 'granyena-de-les-garrigues', 41.4337037, 0.6491443),
 (25, 'Granyena de Segarra', 3900, 'granyena-de-segarra', 41.6224507, 1.2456155),
 (25, 'Guimerà', 3901, 'guimer', 41.5641085, 1.1844278),
-(25, 'Guingueta d''Àneu, La', 3902, 'guingueta-dneu-la', 42.5931733, 1.131205),
+(25, 'Guingueta d\'Àneu, La', 3902, 'guingueta-dneu-la', 42.5931733, 1.131205),
 (25, 'Guissona', 3903, 'guissona', 41.7866972, 1.2907625),
 (25, 'Guixers', 3904, 'guixers', 42.131881, 1.6336464),
 (25, 'Isona i Conca Dellà', 3905, 'isona-i-conca-dell', 42.1196947, 1.0466513),
 (25, 'Ivars de Noguera', 3906, 'ivars-de-noguera', 41.8505005, 0.5869282),
-(25, 'Ivars d''Urgell', 3907, 'ivars-durgell', 41.6835258, 0.9885827),
+(25, 'Ivars d\'Urgell', 3907, 'ivars-durgell', 41.6835258, 0.9885827),
 (25, 'Ivorra', 3908, 'ivorra', 41.7716195, 1.3945488),
 (25, 'Josa i Tuixén', 3909, 'josa-i-tuixn', 42.230881, 1.5668489),
 (25, 'Juncosa', 3910, 'juncosa', 41.3714823, 0.7753397),
@@ -4037,7 +4032,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (25, 'Organyà', 3946, 'organy', 42.2114029, 1.3288642),
 (25, 'Os de Balaguer', 3947, 'os-de-balaguer', 41.8728209, 0.7197718),
 (25, 'Ossó de Sió', 3948, 'oss-de-si', 41.754264, 1.1593297),
-(25, 'Palau d''Anglesola, El', 3949, 'palau-danglesola-el', 41.6516356, 0.880874),
+(25, 'Palau d\'Anglesola, El', 3949, 'palau-danglesola-el', 41.6516356, 0.880874),
 (25, 'Penelles', 3950, 'penelles', 41.7578313, 0.9648493),
 (25, 'Peramola', 3951, 'peramola', 42.0585797, 1.2673349),
 (25, 'Pinell de Solsonès', 3952, 'pinell-de-solsons', 41.9711502, 1.3998185),
@@ -4055,11 +4050,11 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (25, 'Preixens', 3964, 'preixens', 41.7934386, 1.0487129),
 (25, 'Prullans', 3965, 'prullans', 42.3790589, 1.7392843),
 (25, 'Puiggròs', 3966, 'puiggrs', 41.5512708, 0.8889367),
-(25, 'Puigverd d''Agramunt', 3967, 'puigverd-dagramunt', 41.7763989, 1.1216809),
+(25, 'Puigverd d\'Agramunt', 3967, 'puigverd-dagramunt', 41.7763989, 1.1216809),
 (25, 'Puigverd de Lleida', 3968, 'puigverd-de-lleida', 41.5446207, 0.7346072),
 (25, 'Rialp', 3969, 'rialp', 42.4434777, 1.1351768),
-(25, 'Ribera d''Ondara', 3970, 'ribera-dondara', 41.629444, 1.343056),
-(25, 'Ribera d''Urgellet', 3971, 'ribera-durgellet', 42.3266667, 1.3972222),
+(25, 'Ribera d\'Ondara', 3970, 'ribera-dondara', 41.629444, 1.343056),
+(25, 'Ribera d\'Urgellet', 3971, 'ribera-durgellet', 42.3266667, 1.3972222),
 (25, 'Riner', 3972, 'riner', 41.9175661, 1.5721769),
 (25, 'Riu de Cerdanya', 3973, 'riu-de-cerdanya', 42.3455597, 1.8262532),
 (25, 'Rosselló', 3974, '3974-rossell', 41.698439, 0.5957855),
@@ -4076,7 +4071,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (25, 'Senterada', 3985, 'senterada', 42.3242963, 0.93659),
 (25, 'Sentiu de Sió, La', 3986, 'sentiu-de-si-la', 41.805298, 0.8781835),
 (25, 'Seròs', 3987, 'sers', 41.4628352, 0.4108175),
-(25, 'Seu d''Urgell, La', 3988, 'seu-durgell-la', 42.3567052, 1.4596587),
+(25, 'Seu d\'Urgell, La', 3988, 'seu-durgell-la', 42.3567052, 1.4596587),
 (25, 'Sidamon', 3989, 'sidamon', 41.6283756, 0.8336361),
 (25, 'Soleràs, El', 3990, 'solers-el', 41.4125315, 0.684953),
 (25, 'Solsona', 3991, 'solsona', 41.9936263, 1.5177007),
@@ -4109,7 +4104,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (25, 'Vall de Cardós', 4018, 'vall-de-cards', 42.583962, 1.236541),
 (25, 'Vallbona de les Monges', 4019, 'vallbona-de-les-monges', 41.5255595, 1.0894776),
 (25, 'Vallfogona de Balaguer', 4020, 'vallfogona-de-balaguer', 41.7526913, 0.813878),
-(25, 'Valls d''Aguilar, Les', 4021, 'valls-daguilar-les', 42.2958333, 1.3430556),
+(25, 'Valls d\'Aguilar, Les', 4021, 'valls-daguilar-les', 42.2958333, 1.3430556),
 (25, 'Valls de Valira, Les', 4022, 'valls-de-valira-les', 42.3844444, 1.4594444),
 (25, 'Vansa i Fórnols, La', 4023, 'vansa-i-frnols-la', 42.2448, 1.4992),
 (25, 'Verdú', 4024, 'verd', 41.6103406, 1.14266),
@@ -4119,7 +4114,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (25, 'Vilamòs', 4028, 'vilams', 42.7480736, 0.725197),
 (25, 'Vilanova de Bellpuig', 4029, 'vilanova-de-bellpuig', 41.6148144, 0.9596246),
 (25, 'Vilanova de la Barca', 4030, 'vilanova-de-la-barca', 41.6893558, 0.7291372),
-(25, 'Vilanova de l''Aguda', 4031, 'vilanova-de-laguda', 41.9106647, 1.2518063),
+(25, 'Vilanova de l\'Aguda', 4031, 'vilanova-de-laguda', 41.9106647, 1.2518063),
 (25, 'Vilanova de Meià', 4032, 'vilanova-de-mei', 41.9942878, 1.0220767),
 (25, 'Vilanova de Segrià', 4033, 'vilanova-de-segri', 41.7112822, 0.620144),
 (25, 'Vila-sana', 4034, 'vila-sana', 41.6636066, 0.9286443),
@@ -4664,8 +4659,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (30, 'Caravaca de la Cruz', 4573, 'caravaca-de-la-cruz', 38.104229, -1.866195),
 (30, 'Cartagena', 4574, 'cartagena', 37.6153948, -0.7435246),
 (30, 'Cehegín', 4575, 'cehegn', 38.104229, -1.866195),
-(30, 'Ceutí', 4576, 'ceut', 38.1317422, -1.3256601);
-INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
+(30, 'Ceutí', 4576, 'ceut', 38.1317422, -1.3256601),
 (30, 'Cieza', 4577, 'cieza', 38.2332202, -1.4115797),
 (30, 'Fortuna', 4578, 'fortuna', 38.1808694, -1.1216112),
 (30, 'Fuente Álamo de Murcia', 4579, 'fuente-lamo-de-murcia', 37.8833504, -1.140374),
@@ -4685,7 +4679,8 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (30, 'San Javier', 4593, 'san-javier', 37.649927, -0.867187),
 (30, 'San Pedro del Pinatar', 4594, 'san-pedro-del-pinatar', 37.834279, -0.7771379),
 (30, 'Santomera', 4595, 'santomera', 37.724572, -0.8780402),
-(30, 'Torre-Pacheco', 4596, 'torre-pacheco', 37.741801, -0.9516243),
+(30, 'Torre-Pacheco', 4596, 'torre-pacheco', 37.741801, -0.9516243);
+INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
 (30, 'Torres de Cotillas, Las', 4597, 'torres-de-cotillas-las', 38.0008907, -1.1773111),
 (30, 'Totana', 4598, 'totana', 37.7096043, -1.4048705),
 (30, 'Ulea', 4599, 'ulea', 38.1369025, -1.333814),
@@ -5448,8 +5443,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (37, 'Aldehuela de la Bóveda', 5356, 'aldehuela-de-la-bveda', 40.8443732, -6.0485124),
 (37, 'Aldehuela de Yeltes', 5357, 'aldehuela-de-yeltes', 40.6634711, -6.2438986),
 (37, 'Almenara de Tormes', 5358, 'almenara-de-tormes', 41.0640963, -5.8233447),
-(37, 'Almendra', 5359, 'almendra', 41.2297206, -6.341033);
-INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
+(37, 'Almendra', 5359, 'almendra', 41.2297206, -6.341033),
 (37, 'Anaya de Alba', 5360, 'anaya-de-alba', 40.7285475, -5.4923489),
 (37, 'Añover de Tormes', 5361, 'aover-de-tormes', 41.1361608, -5.914971),
 (37, 'Arabayona de Mógica', 5362, 'arabayona-de-mgica', 41.0470963, -5.3862158),
@@ -5471,7 +5465,8 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (37, 'Berrocal de Huebra', 5378, 'berrocal-de-huebra', 40.7179224, -5.9995147),
 (37, 'Berrocal de Salvatierra', 5379, 'berrocal-de-salvatierra', 40.6333276, -5.6893167),
 (37, 'Boada', 5380, 'boada', 40.8160111, -6.3057467),
-(37, 'Bodón, El', 5381, 'bodn-el', 40.9750947, -5.675318),
+(37, 'Bodón, El', 5381, 'bodn-el', 40.9750947, -5.675318);
+INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
 (37, 'Bogajo', 5382, 'bogajo', 40.9073679, -6.5295849),
 (37, 'Bouza, La', 5383, 'bouza-la', 40.9790309, -5.6734323),
 (37, 'Bóveda del Río Almar', 5384, 'bveda-del-ro-almar', 40.8566158, -5.2103743),
@@ -6171,8 +6166,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (41, 'Cabezas de San Juan, Las', 6078, 'cabezas-de-san-juan-las', 36.9813336, -5.9408635),
 (41, 'Camas', 6079, 'camas', 37.4008725, -6.0329114),
 (41, 'Campana, La', 6080, 'campana-la', 37.3927385, -5.9951075),
-(41, 'Cantillana', 6081, 'cantillana', 37.6086734, -5.8258263);
-INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
+(41, 'Cantillana', 6081, 'cantillana', 37.6086734, -5.8258263),
 (41, 'Cañada Rosal', 6082, 'caada-rosal', 37.5989433, -5.2103582),
 (41, 'Carmona', 6083, 'carmona', 37.4710235, -5.6423284),
 (41, 'Carrión de los Céspedes', 6084, 'carrin-de-los-cspedes', 37.368469, -6.3289577),
@@ -6195,7 +6189,8 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (41, 'Estepa', 6101, 'estepa', 37.2914668, -4.8785063),
 (41, 'Fuentes de Andalucía', 6102, 'fuentes-de-andaluca', 37.4622077, -5.3483847),
 (41, 'Garrobo, El', 6103, 'garrobo-el', 37.6253904, -6.172421),
-(41, 'Gelves', 6104, 'gelves', 37.3367676, -6.0253336),
+(41, 'Gelves', 6104, 'gelves', 37.3367676, -6.0253336);
+INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
 (41, 'Gerena', 6105, 'gerena', 37.5255332, -6.1576543),
 (41, 'Gilena', 6106, 'gilena', 37.2513415, -4.9134934),
 (41, 'Gines', 6107, 'gines', 37.3871314, -6.078264),
@@ -6440,23 +6435,23 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (42, 'Yelo', 6346, 'yelo', 41.2105212, -2.5277786),
 (43, 'Aiguamúrcia', 6347, 'aiguamrcia', 41.3301841, 1.3594544),
 (43, 'Albinyana', 6348, 'albinyana', 41.245453, 1.4897531),
-(43, 'Albiol, L''', 6349, 'albiol-l', 41.2518189, 1.08958),
+(43, 'Albiol, L\'', 6349, 'albiol-l', 41.2518189, 1.08958),
 (43, 'Alcanar', 6350, 'alcanar', 40.544838, 0.4811905),
 (43, 'Alcover', 6351, 'alcover', 41.2623936, 1.1701588),
-(43, 'Aldea, L''', 6352, 'aldea-l', 40.7418029, 0.6119037),
+(43, 'Aldea, L\'', 6352, 'aldea-l', 40.7418029, 0.6119037),
 (43, 'Aldover', 6353, 'aldover', 40.8797324, 0.4995357),
-(43, 'Aleixar, L''', 6354, 'aleixar-l', 41.2015065, 1.0446666),
+(43, 'Aleixar, L\'', 6354, 'aleixar-l', 41.2015065, 1.0446666),
 (43, 'Alfara de Carles', 6355, 'alfara-de-carles', 40.8738657, 0.3998365),
 (43, 'Alforja', 6356, 'alforja', 41.2113272, 0.9762403),
 (43, 'Alió', 6357, 'ali', 41.2935224, 1.3054009),
 (43, 'Almoster', 6358, 'almoster', 41.1971911, 1.1124545),
 (43, 'Altafulla', 6359, 'altafulla', 41.1427418, 1.3731464),
-(43, 'Ametlla de Mar, L''', 6360, 'ametlla-de-mar-l', 40.8850733, 0.8033742),
-(43, 'Ampolla, L''', 6361, 'ampolla-l', 40.8132425, 0.7095863),
+(43, 'Ametlla de Mar, L\'', 6360, 'ametlla-de-mar-l', 40.8850733, 0.8033742),
+(43, 'Ampolla, L\'', 6361, 'ampolla-l', 40.8132425, 0.7095863),
 (43, 'Amposta', 6362, 'amposta', 40.7123115, 0.579972),
-(43, 'Arboç, L''', 6363, 'arbo-l', 41.2653523, 1.6035232),
+(43, 'Arboç, L\'', 6363, 'arbo-l', 41.2653523, 1.6035232),
 (43, 'Arbolí', 6364, 'arbol', 41.2425138, 0.9490852),
-(43, 'Argentera, L''', 6365, 'argentera-l', 41.1379345, 0.909145),
+(43, 'Argentera, L\'', 6365, 'argentera-l', 41.1379345, 0.909145),
 (43, 'Arnes', 6366, 'arnes', 40.9109824, 0.260313),
 (43, 'Ascó', 6367, 'asc', 41.183719, 0.5671799),
 (43, 'Banyeres del Penedès', 6368, 'banyeres-del-peneds', 41.2796693, 1.5833769),
@@ -6488,13 +6483,13 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (43, 'Colldejou', 6394, 'colldejou', 41.09893, 0.8881252),
 (43, 'Conesa', 6395, 'conesa', 41.5202019, 1.2927092),
 (43, 'Constantí', 6396, 'constant', 41.1510429, 1.2166753),
-(43, 'Corbera d''Ebre', 6397, 'corbera-debre', 41.0776354, 0.4780503),
+(43, 'Corbera d\'Ebre', 6397, 'corbera-debre', 41.0776354, 0.4780503),
 (43, 'Cornudella de Montsant', 6398, 'cornudella-de-montsant', 41.2650619, 0.905523),
 (43, 'Creixell', 6399, 'creixell', 41.1662282, 1.4405358),
 (43, 'Cunit', 6400, 'cunit', 41.1988412, 1.6367388),
 (43, 'Deltebre', 6401, 'deltebre', 40.7194412, 0.7083474),
 (43, 'Duesaigües', 6402, 'duesaiges', 41.1447336, 0.9291461),
-(43, 'Espluga de Francolí, L''', 6403, 'espluga-de-francol-l', 41.394812, 1.0985102),
+(43, 'Espluga de Francolí, L\'', 6403, 'espluga-de-francol-l', 41.394812, 1.0985102),
 (43, 'Falset', 6404, 'falset', 41.146334, 0.8212665),
 (43, 'Fatarella, La', 6405, 'fatarella-la', 41.1615848, 0.4733999),
 (43, 'Febró, La', 6406, 'febr-la', 41.2771181, 1.005036),
@@ -6532,14 +6527,14 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (43, 'Montmell, El', 6438, 'montmell-el', 41.3175, 1.454167),
 (43, 'Mont-ral', 6439, 'mont-ral', 41.2868632, 1.0971404),
 (43, 'Mont-roig del Camp', 6440, 'mont-roig-del-camp', 41.0855649, 0.9616579),
-(43, 'Móra d''Ebre', 6441, 'mra-debre', 41.0885896, 0.6391603),
+(43, 'Móra d\'Ebre', 6441, 'mra-debre', 41.0885896, 0.6391603),
 (43, 'Móra la Nova', 6442, 'mra-la-nova', 41.1009365, 0.6511012),
 (43, 'Morell, El', 6443, 'morell-el', 41.1922909, 1.2068841),
 (43, 'Morera de Montsant, La', 6444, 'morera-de-montsant-la', 41.265955, 0.840601),
 (43, 'Nou de Gaià, La', 6445, 'nou-de-gai-la', 41.1822901, 1.3744789),
 (43, 'Nulles', 6446, 'nulles', 41.2505789, 1.295914),
 (43, 'Pallaresos, Els', 6447, 'pallaresos-els', 41.175765, 1.2721409),
-(43, 'Palma d''Ebre, La', 6448, 'palma-debre-la', 41.2842466, 0.6655047),
+(43, 'Palma d\'Ebre, La', 6448, 'palma-debre-la', 41.2842466, 0.6655047),
 (43, 'Passanant i Belltall', 6449, 'passanant-i-belltall', 41.5316405, 1.1970802),
 (43, 'Paüls', 6450, '6450-pals', 40.9221151, 0.4018317),
 (43, 'Perafort', 6451, 'perafort', 41.1920035, 1.2560161),
@@ -6552,7 +6547,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (43, 'Pobla de Massaluca, La', 6458, 'pobla-de-massaluca-la', 41.1810207, 0.3540713),
 (43, 'Pobla de Montornès, La', 6459, 'pobla-de-montorns-la', 41.1787781, 1.4146188),
 (43, 'Poboleda', 6460, 'poboleda', 41.2349586, 0.8457368),
-(43, 'Pont d''Armentera, El', 6461, 'pont-darmentera-el', 41.384068, 1.3626146),
+(43, 'Pont d\'Armentera, El', 6461, 'pont-darmentera-el', 41.384068, 1.3626146),
 (43, 'Pontils', 6462, 'pontils', 41.4772418, 1.3882711),
 (43, 'Porrera', 6463, 'porrera', 41.1879143, 0.8540307),
 (43, 'Pradell de la Teixeta', 6464, 'pradell-de-la-teixeta', 41.1569302, 0.8759075),
@@ -6565,7 +6560,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (43, 'Renau', 6471, 'renau', 41.2244955, 1.3116477),
 (43, 'Reus', 6472, 'reus', 41.1548179, 1.108676),
 (43, 'Riba, La', 6473, 'riba-la', 41.1168207, 1.2464116),
-(43, 'Riba-roja d''Ebre', 6474, 'riba-roja-debre', 41.2505754, 0.4876638),
+(43, 'Riba-roja d\'Ebre', 6474, 'riba-roja-debre', 41.2505754, 0.4876638),
 (43, 'Riera de Gaià, La', 6475, 'riera-de-gai-la', 41.1446372, 1.3588961),
 (43, 'Riudecanyes', 6476, 'riudecanyes', 41.1305347, 0.9625295),
 (43, 'Riudecols', 6477, 'riudecols', 41.1676826, 0.9759995),
@@ -6579,7 +6574,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (43, 'Salou', 6485, 'salou', 41.076769, 1.1440408),
 (43, 'Sant Carles de la Ràpita', 6486, 'sant-carles-de-la-rpita', 40.6202045, 0.5928925),
 (43, 'Sant Jaume dels Domenys', 6487, 'sant-jaume-dels-domenys', 41.2993365, 1.5590533),
-(43, 'Sant Jaume d''Enveja', 6488, 'sant-jaume-denveja', 40.7039917, 0.7173735),
+(43, 'Sant Jaume d\'Enveja', 6488, 'sant-jaume-denveja', 40.7039917, 0.7173735),
 (43, 'Santa Bàrbara', 6489, 'santa-brbara', 40.7144251, 0.4922784),
 (43, 'Santa Coloma de Queralt', 6490, 'santa-coloma-de-queralt', 41.5308881, 1.3814796),
 (43, 'Santa Oliva', 6491, 'santa-oliva', 41.2525168, 1.5493767),
@@ -6594,7 +6589,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (43, 'Tivenys', 6500, 'tivenys', 40.9074035, 0.5112524),
 (43, 'Tivissa', 6501, 'tivissa', 41.0395663, 0.7331267),
 (43, 'Torre de Fontaubella, La', 6502, 'torre-de-fontaubella-la', 41.1251693, 0.8647319),
-(43, 'Torre de l''Espanyol, La', 6503, 'torre-de-lespanyol-la', 41.1925067, 0.6271237),
+(43, 'Torre de l\'Espanyol, La', 6503, 'torre-de-lespanyol-la', 41.1925067, 0.6271237),
 (43, 'Torredembarra', 6504, 'torredembarra', 41.1445142, 1.3971),
 (43, 'Torroja del Priorat', 6505, 'torroja-del-priorat', 41.2131681, 0.8101557),
 (43, 'Tortosa', 6506, 'tortosa', 40.8110042, 0.5209974),
@@ -6604,14 +6599,14 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (43, 'Vallfogona de Riucorb', 6510, 'vallfogona-de-riucorb', 41.5627933, 1.2373226),
 (43, 'Vallmoll', 6511, 'vallmoll', 41.2436064, 1.2492871),
 (43, 'Valls', 6512, 'valls', 41.2872758, 1.2515789),
-(43, 'Vandellòs i l''Hospitalet de l''Infant', 6513, 'vandells-i-lhospitalet-de-linfant', 41.0201054, 0.8329072),
+(43, 'Vandellòs i l\'Hospitalet de l\'Infant', 6513, 'vandells-i-lhospitalet-de-linfant', 41.0201054, 0.8329072),
 (43, 'Vendrell, El', 6514, 'vendrell-el', 41.2204167, 1.5348453),
 (43, 'Vespella de Gaià', 6515, 'vespella-de-gai', 41.2054255, 1.3594288),
 (43, 'Vilabella', 6516, 'vilabella', 41.248242, 1.3316246),
 (43, 'Vilalba dels Arcs', 6517, 'vilalba-dels-arcs', 41.1205485, 0.4081464),
 (43, 'Vilallonga del Camp', 6518, 'vilallonga-del-camp', 41.2089985, 1.2072605),
 (43, 'Vilanova de Prades', 6519, 'vilanova-de-prades', 41.3478356, 0.9562585),
-(43, 'Vilanova d''Escornalbou', 6520, 'vilanova-descornalbou', 41.1141893, 0.9367994),
+(43, 'Vilanova d\'Escornalbou', 6520, 'vilanova-descornalbou', 41.1141893, 0.9367994),
 (43, 'Vilaplana', 6521, 'vilaplana', 41.2289813, 1.0328733),
 (43, 'Vila-rodona', 6522, 'vila-rodona', 41.3096661, 1.35811),
 (43, 'Vila-seca', 6523, 'vila-seca', 41.1109501, 1.1450011),
@@ -6933,8 +6928,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (45, 'Hinojosa de San Vicente', 6839, 'hinojosa-de-san-vicente', 40.1040244, -4.724235),
 (45, 'Hontanar', 6840, 'hontanar', 39.6121992, -4.4983396),
 (45, 'Hormigos', 6841, 'hormigos', 40.0983616, -4.4451416),
-(45, 'Huecas', 6842, 'huecas', 40.0118377, -4.1958084);
-INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
+(45, 'Huecas', 6842, 'huecas', 40.0118377, -4.1958084),
 (45, 'Huerta de Valdecarábanos', 6843, 'huerta-de-valdecarbanos', 39.8643299, -3.6119176),
 (45, 'Iglesuela, La', 6844, 'iglesuela-la', 40.2334196, -4.7503364),
 (45, 'Illán de Vacas', 6845, 'illn-de-vacas', 39.9704783, -4.5564592),
@@ -6963,7 +6957,8 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (45, 'Mohedas de la Jara', 6868, 'mohedas-de-la-jara', 39.6050398, -5.1432759),
 (45, 'Montearagón', 6869, 'montearagn', 39.9644746, -4.6327345),
 (45, 'Montesclaros', 6870, 'montesclaros', 40.1076144, -4.9384672),
-(45, 'Mora', 6871, 'mora', 39.6842562, -3.7734872),
+(45, 'Mora', 6871, 'mora', 39.6842562, -3.7734872);
+INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
 (45, 'Nambroca', 6872, 'nambroca', 39.7969075, -3.9437446),
 (45, 'Nava de Ricomalillo, La', 6873, 'nava-de-ricomalillo-la', 39.6514282, -4.9902078),
 (45, 'Navahermosa', 6874, 'navahermosa', 39.6356645, -4.4696137),
@@ -7081,8 +7076,8 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (46, 'Alcàntera de Xúquer', 6986, 'alcntera-de-xquer', 39.0679268, -0.5611053),
 (46, 'Alcàsser', 6987, 'alcsser', 39.3693089, -0.4428184),
 (46, 'Alcublas', 6988, 'alcublas', 39.7971568, -0.7021778),
-(46, 'Alcúdia, l''', 6989, 'alcdia-l', 39.1983195, -0.507092),
-(46, 'Alcúdia de Crespins, l''', 6990, 'alcdia-de-crespins-l', 38.9709614, -0.5911145),
+(46, 'Alcúdia, l\'', 6989, 'alcdia-l', 39.1983195, -0.507092),
+(46, 'Alcúdia de Crespins, l\'', 6990, 'alcdia-de-crespins-l', 38.9709614, -0.5911145),
 (46, 'Aldaia', 6991, 'aldaia', 39.4650522, -0.4613582),
 (46, 'Alfafar', 6992, 'alfafar', 39.4232324, -0.3898719),
 (46, 'Alfara de la Baronia', 6993, 'alfara-de-la-baronia', 39.7625461, -0.3550662),
@@ -7099,13 +7094,13 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (46, 'Almoines', 7004, 'almoines', 38.9431646, -0.1798222),
 (46, 'Almussafes', 7005, 'almussafes', 39.2933288, -0.4107316),
 (46, 'Alpuente', 7006, 'alpuente', 39.8755331, -1.0136984),
-(46, 'Alqueria de la Comtessa, l''', 7007, 'alqueria-de-la-comtessa-l', 38.9359456, -0.1537111),
+(46, 'Alqueria de la Comtessa, l\'', 7007, 'alqueria-de-la-comtessa-l', 38.9359456, -0.1537111),
 (46, 'Alzira', 7008, 'alzira', 39.1515899, -0.4404637),
 (46, 'Andilla', 7009, 'andilla', 39.8356667, -0.813692),
 (46, 'Anna', 7010, 'anna', 39.0202096, -0.6453875),
 (46, 'Antella', 7011, 'antella', 39.0791486, -0.5926116),
 (46, 'Aras de los Olmos', 7012, 'aras-de-los-olmos', 39.9241494, -1.1333471),
-(46, 'Atzeneta d''Albaida', 7013, 'atzeneta-dalbaida', 38.8366585, -0.4960669),
+(46, 'Atzeneta d\'Albaida', 7013, 'atzeneta-dalbaida', 38.8366585, -0.4960669),
 (46, 'Ayora', 7014, 'ayora', 39.0581746, -1.0578972),
 (46, 'Barx', 7015, 'barx', 39.0126236, -0.3010528),
 (46, 'Barxeta', 7016, 'barxeta', 39.0213202, -0.4157147),
@@ -7145,7 +7140,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (46, 'Calles', 7050, 'calles', 39.7253044, -0.9739533),
 (46, 'Camporrobles', 7051, 'camporrobles', 39.6471827, -1.3965823),
 (46, 'Canals', 7052, 'canals', 38.9607512, -0.5842204),
-(46, 'Canet d''En Berenguer', 7053, 'canet-den-berenguer', 39.6797957, -0.2209121),
+(46, 'Canet d\'En Berenguer', 7053, 'canet-den-berenguer', 39.6797957, -0.2209121),
 (46, 'Carcaixent', 7054, 'carcaixent', 39.1212219, -0.4496824),
 (46, 'Càrcer', 7055, 'crcer', 39.0689004, -0.5652466),
 (46, 'Carlet', 7056, 'carlet', 39.2277125, -0.5231268),
@@ -7174,17 +7169,17 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (46, 'Daimús', 7079, 'daims', 38.9699972, -0.1538377),
 (46, 'Domeño', 7080, 'domeo', 39.6620176, -0.6709148),
 (46, 'Dos Aguas', 7081, 'dos-aguas', 39.2893234, -0.7998479),
-(46, 'Eliana, l''', 7082, 'eliana-l', 39.5663223, -0.5302467),
+(46, 'Eliana, l\'', 7082, 'eliana-l', 39.5663223, -0.5302467),
 (46, 'Emperador', 7083, 'emperador', 39.5543202, -0.3396982),
 (46, 'Enguera', 7084, 'enguera', 38.9800298, -0.6884746),
-(46, 'Ènova, l''', 7085, 'nova-l', 39.0439066, -0.4802662),
+(46, 'Ènova, l\'', 7085, 'nova-l', 39.0439066, -0.4802662),
 (46, 'Estivella', 7086, 'estivella', 39.7122923, -0.347827),
 (46, 'Estubeny', 7087, 'estubeny', 39.0179381, -0.623651),
 (46, 'Faura', 7088, 'faura', 39.7259613, -0.2636878),
 (46, 'Favara', 7089, 'favara', 39.1274302, -0.2910376),
 (46, 'Foios', 7090, 'foios', 39.5376259, -0.3565129),
 (46, 'Font de la Figuera, la', 7091, 'font-de-la-figuera-la', 38.8074612, -0.8817337),
-(46, 'Font d''En Carròs, la', 7092, 'font-den-carrs-la', 39.4813389, -0.3268051),
+(46, 'Font d\'En Carròs, la', 7092, 'font-den-carrs-la', 39.4813389, -0.3268051),
 (46, 'Fontanars dels Alforins', 7093, 'fontanars-dels-alforins', 38.7844217, -0.785836),
 (46, 'Fortaleny', 7094, 'fortaleny', 39.1837603, -0.3135945),
 (46, 'Fuenterrobles', 7095, 'fuenterrobles', 39.5860628, -1.3632731),
@@ -7208,7 +7203,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (46, 'Llíria', 7113, 'llria', 39.6245825, -0.5947581),
 (46, 'Llocnou de la Corona', 7114, 'llocnou-de-la-corona', 39.4202679, -0.3823406),
 (46, 'Llocnou de Sant Jeroni', 7115, 'llocnou-de-sant-jeroni', 38.9124588, -0.2856349),
-(46, 'Llocnou d''En Fenollet', 7116, 'llocnou-den-fenollet', 39.013585, -0.467483),
+(46, 'Llocnou d\'En Fenollet', 7116, 'llocnou-den-fenollet', 39.013585, -0.467483),
 (46, 'Llombai', 7117, 'llombai', 39.282428, -0.5724804),
 (46, 'Llosa de Ranes, la', 7118, 'llosa-de-ranes-la', 39.0186497, -0.5336824),
 (46, 'Llutxent', 7119, 'llutxent', 38.9426588, -0.3566575),
@@ -7238,7 +7233,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (46, 'Navarrés', 7143, 'navarrs', 39.1012085, -0.6936884),
 (46, 'Novelé/Novetlè', 7144, 'novelnovetl', 38.979801, -0.5479128),
 (46, 'Oliva', 7145, 'oliva', 38.9193871, -0.1226779),
-(46, 'Olleria, l''', 7146, 'olleria-l', 38.9141912, -0.5494962),
+(46, 'Olleria, l\'', 7146, 'olleria-l', 38.9141912, -0.5494962),
 (46, 'Olocau', 7147, 'olocau', 39.6998493, -0.5312006),
 (46, 'Ontinyent', 7148, 'ontinyent', 38.8210172, -0.610547),
 (46, 'Otos', 7149, 'otos', 38.8542528, -0.4450282),
@@ -7693,8 +7688,7 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (49, 'Bretocino', 7598, 'bretocino', 41.883373, -5.7550897),
 (49, 'Brime de Sog', 7599, 'brime-de-sog', 42.0612633, -6.0474146),
 (49, 'Brime de Urz', 7600, 'brime-de-urz', 42.0379096, -5.8732659),
-(49, 'Burganes de Valverde', 7601, 'burganes-de-valverde', 41.9207795, -5.7810864);
-INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
+(49, 'Burganes de Valverde', 7601, 'burganes-de-valverde', 41.9207795, -5.7810864),
 (49, 'Bustillo del Oro', 7602, 'bustillo-del-oro', 41.6745589, -5.461473),
 (49, 'Cabañas de Sayago', 7603, 'cabaas-de-sayago', 41.3330753, -5.7907063),
 (49, 'Calzadilla de Tera', 7604, 'calzadilla-de-tera', 41.9800263, -6.0824639),
@@ -7722,7 +7716,8 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 (49, 'Cubo de Benavente', 7626, 'cubo-de-benavente', 42.1236626, -6.1631512),
 (49, 'Cubo de Tierra del Vino, El', 7627, 'cubo-de-tierra-del-vino-el', 41.2549722, -5.7108636),
 (49, 'Cuelgamures', 7628, 'cuelgamures', 41.3061134, -5.659101),
-(49, 'Entrala', 7629, 'entrala', 41.4300252, -5.7548582),
+(49, 'Entrala', 7629, 'entrala', 41.4300252, -5.7548582);
+INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, `longitud`) VALUES
 (49, 'Espadañedo', 7630, 'espadaedo', 42.1166191, -6.3948668),
 (49, 'Faramontanos de Tábara', 7631, 'faramontanos-de-tbara', 41.8364913, -5.888256),
 (49, 'Fariza', 7632, 'fariza', 41.4166667, -6.2666667),
@@ -8217,16 +8212,13 @@ INSERT INTO `municipios` (`provincia_id`, `municipio`, `id`, `slug`, `latitud`, 
 -- Estructura de tabla para la tabla `provincias`
 --
 
-CREATE TABLE IF NOT EXISTS `provincias` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `provincias` (
+  `id` int(10) UNSIGNED NOT NULL,
   `slug` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `provincia` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
-  `comunidad_id` int(10) unsigned NOT NULL,
-  `capital_id` int(11) NOT NULL DEFAULT '-1',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `IDX_provincia` (`provincia`),
-  KEY `FK_provincias` (`comunidad_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=53 ;
+  `comunidad_id` int(10) UNSIGNED NOT NULL,
+  `capital_id` int(11) NOT NULL DEFAULT -1
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 CHECKSUM=1 COLLATE=utf8_spanish_ci DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Volcado de datos para la tabla `provincias`
@@ -8292,8 +8284,8 @@ INSERT INTO `provincias` (`id`, `slug`, `provincia`, `comunidad_id`, `capital_id
 -- Estructura de tabla para la tabla `tasaciones`
 --
 
-CREATE TABLE IF NOT EXISTS `tasaciones` (
-  `id` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tasaciones` (
+  `id` int(5) NOT NULL,
   `comunidad_id` int(5) NOT NULL,
   `provincia_id` int(5) NOT NULL,
   `municipio_id` int(5) NOT NULL,
@@ -8304,9 +8296,15 @@ CREATE TABLE IF NOT EXISTS `tasaciones` (
   `metros_reales` float(7,2) NOT NULL,
   `metros_computados` float(7,2) NOT NULL,
   `valor_metros_cuadrados` float(7,2) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=22 ;
+  `fecha_tasacion` date NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `tasaciones`
+--
+
+INSERT INTO `tasaciones` (`id`, `comunidad_id`, `provincia_id`, `municipio_id`, `direccion`, `id_tipo_de_via`, `id_tipo_de_vivienda`, `id_vivienda`, `metros_reales`, `metros_computados`, `valor_metros_cuadrados`, `fecha_tasacion`) VALUES
+(1, 9, 8, 1011, 'Esglesia, 16', 5, 1, 3, 120.00, 108.00, 1239.47, '2018-12-20');
 
 -- --------------------------------------------------------
 
@@ -8314,11 +8312,10 @@ CREATE TABLE IF NOT EXISTS `tasaciones` (
 -- Estructura de tabla para la tabla `tipos_de_via`
 --
 
-CREATE TABLE IF NOT EXISTS `tipos_de_via` (
-  `id` int(3) NOT NULL AUTO_INCREMENT,
-  `tipo` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=36 ;
+CREATE TABLE `tipos_de_via` (
+  `id` int(3) NOT NULL,
+  `tipo` varchar(20) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tipos_de_via`
@@ -8367,11 +8364,10 @@ INSERT INTO `tipos_de_via` (`id`, `tipo`) VALUES
 -- Estructura de tabla para la tabla `tipos_de_vivienda`
 --
 
-CREATE TABLE IF NOT EXISTS `tipos_de_vivienda` (
-  `id` int(3) NOT NULL AUTO_INCREMENT,
-  `tipo` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
+CREATE TABLE `tipos_de_vivienda` (
+  `id` int(3) NOT NULL,
+  `tipo` varchar(20) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tipos_de_vivienda`
@@ -8387,12 +8383,11 @@ INSERT INTO `tipos_de_vivienda` (`id`, `tipo`) VALUES
 -- Estructura de tabla para la tabla `viviendas`
 --
 
-CREATE TABLE IF NOT EXISTS `viviendas` (
-  `id` int(3) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `viviendas` (
+  `id` int(3) NOT NULL,
   `id_tipo_de_vivienda` int(1) NOT NULL,
-  `vivienda` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=10 ;
+  `vivienda` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `viviendas`
@@ -8408,6 +8403,99 @@ INSERT INTO `viviendas` (`id`, `id_tipo_de_vivienda`, `vivienda`) VALUES
 (7, 2, 'ático'),
 (8, 2, 'piso'),
 (9, 2, 'bajo con jardín');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `comunidades`
+--
+ALTER TABLE `comunidades`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `IDX_cominidad` (`comunidad`),
+  ADD UNIQUE KEY `slug` (`slug`);
+
+--
+-- Indices de la tabla `municipios`
+--
+ALTER TABLE `municipios`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `IDX_municipio` (`provincia_id`,`municipio`),
+  ADD UNIQUE KEY `slug` (`slug`);
+
+--
+-- Indices de la tabla `provincias`
+--
+ALTER TABLE `provincias`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `IDX_provincia` (`provincia`),
+  ADD KEY `FK_provincias` (`comunidad_id`);
+
+--
+-- Indices de la tabla `tasaciones`
+--
+ALTER TABLE `tasaciones`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tipos_de_via`
+--
+ALTER TABLE `tipos_de_via`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tipos_de_vivienda`
+--
+ALTER TABLE `tipos_de_vivienda`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `viviendas`
+--
+ALTER TABLE `viviendas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `municipios`
+--
+ALTER TABLE `municipios`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8117;
+
+--
+-- AUTO_INCREMENT de la tabla `provincias`
+--
+ALTER TABLE `provincias`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT de la tabla `tasaciones`
+--
+ALTER TABLE `tasaciones`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `tipos_de_via`
+--
+ALTER TABLE `tipos_de_via`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT de la tabla `tipos_de_vivienda`
+--
+ALTER TABLE `tipos_de_vivienda`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `viviendas`
+--
+ALTER TABLE `viviendas`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -108,6 +108,10 @@ $viviendas = get_viviendas();
                 <td><label>Valor m<sup>2</sup></label></td>
                 <td><input type="text" id="valor_metro_cuadrado" name="valor_metro_cuadrado" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="valor metro..."/><i>€</i></td>
             </tr>
+            <tr>
+                <td><label>Fecha de tasación</label></td>
+                <td><input type="date" id="fecha_tasacion" name="fecha_tasacion"></td>
+            </tr>
             <!-- https://desarrolloweb.com/articulos/1307.php -->
             <tr>
                 <td><label>Archivo de tasación</label></td>
@@ -150,6 +154,7 @@ function validar_form(){
     document.getElementById("metros_reales").style.borderColor = "green";
     document.getElementById("metros_computados").style.borderColor = "green";
     document.getElementById("valor_metro_cuadrado").style.borderColor = "green";
+    document.getElementById("fecha_tasacion").style.borderColor = "green";
     
     document.getElementById("errores_form").innerHTML="<ul id='errores'></ul>";
     
@@ -201,6 +206,11 @@ function validar_form(){
     if(document.getElementById("valor_metro_cuadrado").value===""){
         document.getElementById("errores").innerHTML+="<li>Debes añadir el valor del m<sup>2</sup>.</li>";
         document.getElementById("valor_metro_cuadrado").style.borderColor = "red";
+        valido=false;
+    }
+    if(document.getElementById("fecha_tasacion").value===""){
+        document.getElementById("errores").innerHTML+="<li>Debes seleccionar una fecha.</li>";
+        document.getElementById("fecha_tasacion").style.borderColor = "red";
         valido=false;
     }
         

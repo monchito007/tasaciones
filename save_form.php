@@ -30,6 +30,7 @@ $select_viviendas = $_POST["select_viviendas"];
 $metros_reales = str_replace(",",".", $_POST["metros_reales"]);
 $metros_computados = str_replace(",",".", $_POST["metros_computados"]);
 $valor_metro_cuadrado = str_replace(",",".", $_POST["valor_metro_cuadrado"]);
+$fecha_tasacion = $_POST["fecha_tasacion"];
 $file = $_FILES["file"]["name"];
 $SubirBtn = $_POST["SubirBtn"];
 
@@ -45,6 +46,7 @@ echo "<th>select_viviendas</th>";
 echo "<th>metros_reales</th>";
 echo "<th>metros_computados</th>";
 echo "<th>valor_metro_cuadrado</th>";
+echo "<th>fecha_tasacion</th>";
 echo "<th>file</th>";
 echo "<th>SubirBtn</th>";
 echo "</tr>";
@@ -60,6 +62,7 @@ echo "<td>$select_viviendas</td>";
 echo "<td>$metros_reales</td>";
 echo "<td>$metros_computados</td>";
 echo "<td>$valor_metro_cuadrado</td>";
+echo "<td>$fecha_tasacion</td>";
 echo "<td>$file</td>";
 echo "<td>$SubirBtn</td>";
 echo "</tr>";
@@ -77,8 +80,9 @@ $id_tasacion = obtener_id_tasacion()+1;
 
 $direccion = str_replace("'", "''", $direccion);
 
-$query = "INSERT INTO tasaciones (comunidad_id, provincia_id, municipio_id, direccion, id_tipo_de_via, id_tipo_de_vivienda, id_vivienda, metros_reales, metros_computados, valor_metros_cuadrados) "
-        . "VALUES ($select_comunidad, $select_provincia, $select_municipio, '$direccion', $select_tipo_via, $select_tipo_vivienda, $select_viviendas, $metros_reales, $metros_computados, $valor_metro_cuadrado);";
+
+$query = "INSERT INTO tasaciones (comunidad_id, provincia_id, municipio_id, direccion, id_tipo_de_via, id_tipo_de_vivienda, id_vivienda, metros_reales, metros_computados, valor_metros_cuadrados, fecha_tasacion) "
+        . "VALUES ($select_comunidad, $select_provincia, $select_municipio, '$direccion', $select_tipo_via, $select_tipo_vivienda, $select_viviendas, $metros_reales, $metros_computados, $valor_metro_cuadrado, '$fecha_tasacion');";
 
 
 //Colocamos el autoincrement en el id que toca.
