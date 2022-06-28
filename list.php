@@ -182,18 +182,18 @@ $result = consulta_sql($query);
         echo "<tr>";
         echo "<th scope='row'>".$datos[0]."</th>";
         echo "<td>".utf8_encode($datos[1])."</td>";
-        echo "<td>".$datos[2]."</td>";
-        echo "<td>".$datos[3]."</td>";
-        echo "<td>".utf8_decode($datos[4])."</td>";
-        echo "<td>".$datos[5]."</td>";
-        echo "<td>".$datos[6]."</td>";
-        echo "<td>".$datos[7]."</td>";
-        echo "<td>".$datos[8]."</td>";
-        echo "<td>".$datos[9]."</td>";
-        echo "<td>".$datos[10]."</td>";
-        echo "<td>".$datos[11]."</td>";
-        echo "<td><a href='docs/".$datos[0]."/".$datos[0].".pdf' target='_BLANK'>Archivo</a></td>";
-        echo "<td><a href='page.php?page=delete.php&id=".$datos[0]."'>Eliminar</a></td>";
+        echo "<td>".utf8_encode($datos[2])."</td>";
+        echo "<td>".utf8_encode($datos[3])."</td>";
+        echo "<td>".utf8_encode($datos[4])."</td>";
+        echo "<td>".utf8_decode($datos[5])."</td>";
+        echo "<td>".utf8_encode($datos[6])."</td>";
+        echo "<td>".utf8_encode($datos[7])."</td>";
+        echo "<td>".utf8_encode($datos[8])."</td>";
+        echo "<td>".utf8_encode($datos[9])."</td>";
+        echo "<td>".utf8_encode($datos[10])."</td>";
+        echo "<td>".utf8_encode($datos[11])."</td>";
+        echo "<td><a href='docs/".$datos[0]."/".$datos[0].".pdf' target='_BLANK'>Archivo</a><br></td>";
+        echo "<td><a href='page.php?page=edit.php&id=".$datos[0]."'>Modificar</a><br><a href='page.php?page=delete.php&id=".$datos[0]."'>Eliminar</a></td>";
         echo "</tr>";
        
     }
@@ -240,9 +240,10 @@ $("#form_busqueda").hide();
 $("#buscar").click(function(){
  
  if($("#form_busqueda").is(":hidden")){
-                $("#form_busqueda").show();
+                $("#form_busqueda").show(1000);
+                $("#busqueda").focus();
             } else{
-                $("#form_busqueda").hide();
+                $("#form_busqueda").hide(1000);
             }
  
  

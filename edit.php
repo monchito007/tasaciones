@@ -4,8 +4,8 @@
 
 Titulo: form.php
 Autor: Moisés Aguilar Miranda
-Fecha: 04/11/2020
-Descripción: Formulario para añadir las tasaciones.
+Fecha: 22/06/2022
+Descripción: Formulario para editar las tasaciones.
 Comentarios:
  
 **********************************************************************/
@@ -13,8 +13,15 @@ Comentarios:
 ?>
 <?php
 
+$id_tasacion = $_SESSION['id'];
+
 include 'functions/connect_db.php';
 include 'functions/functions.php';
+
+$datos_tasacion = obtener_tasacion_sql($id_tasacion);
+
+//print_r($datos_tasacion);
+
 
 //echo "Num Tasaciones: ".obtener_num_tasaciones();
 
@@ -30,11 +37,14 @@ $viviendas = get_viviendas();
 //echo json_encode(sql_to_array($comunidades));
 
 ?>
-<div id="title"><h1>Añadir tasación</h1></div>
+<div id="title"><h1>Editar tasación</h1></div>
 
 <div id="content2">
 
-    <form method="POST" action="save_form.php" enctype="multipart/form-data" onsubmit="return validar_form(this)">
+    <form method="POST" action="mod_form.php" enctype="multipart/form-data" onsubmit="return validar_form(this)">
+        
+        <input id="id_tasacion" name="id_tasacion" type="hidden" value="<?php echo $datos_tasacion['id']; ?>">
+        
         <table class="tabla" id="table_formulario">
             <!-- Selects dinamicos
             https://desarrolloweb.com/articulos/1281.php -->
@@ -72,7 +82,7 @@ $viviendas = get_viviendas();
             </tr>
             <tr>
                 <td><label>Direccion</label></td>
-                <td><textarea id="direccion" name="direccion" placeholder="Añade la dirección..."></textarea></td>
+                <td><textarea id="direccion" name="direccion" placeholder="Añade la dirección..."><?php echo $datos_tasacion['direccion']; ?></textarea></td>
             </tr>
             <tr>
                 <td><label>Tipo de vivienda</label></td>
@@ -98,30 +108,33 @@ $viviendas = get_viviendas();
             </tr>
             <tr>
                 <td><label>Metros reales</label></td>
-                <td><input type="text" id="metros_reales" name="metros_reales" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="metros reales..."/><i>metros</i></td>
+                <td><input type="text" id="metros_reales" name="metros_reales" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="metros reales..." value="<?php echo $datos_tasacion['metros_reales']; ?>"/><i>metros</i></td>
             </tr>
             <tr>
                 <td><label>Metros computados</label></td>
-                <td><input type="text" id="metros_computados" name="metros_computados" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="metros computados..."/><i>metros</i></td>
+                <td><input type="text" id="metros_computados" name="metros_computados" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="metros computados..." value="<?php echo $datos_tasacion['metros_computados']; ?>"/><i>metros</i></td>
             </tr>
             <tr>
                 <td><label>Valor m<sup>2</sup></label></td>
-                <td><input type="text" id="valor_metro_cuadrado" name="valor_metro_cuadrado" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="valor metro..."/><i>€</i></td>
+                <td><input type="text" id="valor_metro_cuadrado" name="valor_metro_cuadrado" maxlength="7" onkeypress="return filterFloat(event,this);" placeholder="valor metro..." value="<?php echo $datos_tasacion['valor_metros_cuadrados']; ?>"/><i>€</i></td>
             </tr>
             <tr>
                 <td><label>Fecha de tasación</label></td>
-                <td><input type="date" id="fecha_tasacion" name="fecha_tasacion"></td>
+                <td><input type="date" id="fecha_tasacion" name="fecha_tasacion" value="<?php echo $datos_tasacion['fecha_tasacion']; ?>"></td>
             </tr>
             <!-- https://desarrolloweb.com/articulos/1307.php -->
+            <!--
             <tr>
                 <td><label>Archivo de tasación</label></td>
-                <td><input id="file" name="file" type="file"></td>                
+                <td><input id="file" name="file" type="file"></td>
             </tr>
             <tr>
                 <td></td>
                 <td><input type="button" id="DelBtn" name="DelBtn" value="Eliminar archivo" onclick="eliminar_archivo()"/></td>
             </tr>
+            -->
             <tr>
+            
                 <td><input type="submit" id="SubirBtn" name="SubirBtn" value="Subir" /></td>
                 <td><input type="reset" value="Borrar"></td>
                 
@@ -214,18 +227,6 @@ function validar_form(){
         valido=false;
     }
         
-    var filePath = document.getElementById('file').value;    
-    var extension = filePath.slice(-3).toLowerCase();
-    var fileSize = document.getElementById('file').size;
-    
-    //alert("filesize: " + fileSize);
-    
-    if((extension==='')||(extension!=='pdf')){
-        document.getElementById("errores").innerHTML+="<li>Archivo no cargado o de extensión incorrecta. Debe ser en formato PDF. Máximo 10 Mb. </li>";
-        document.getElementById("file").style.borderColor = "red";
-        valido=false;
-    }
-    
     return valido;
     
 }
@@ -235,18 +236,88 @@ function validar_form(){
 $(document).ready(function(){
     
     //Deshabilitamos los Selects Provincias y Municipios porque no hemos seleccionado ninguna Comunidad.
-    $("#select_provincia").prop("disabled",true);
-    $("#select_municipio").prop("disabled",true);
-    $("#select_viviendas").prop("disabled",true);
+    //$("#select_provincia").prop("disabled",true);
+    //$("#select_municipio").prop("disabled",true);
+    //$("#select_viviendas").prop("disabled",true);
     
     
     //Función para cargar un select Comunidades desde un archivo JSON
     $.getJSON('json/comunidades.json', function(data) {
         $.each(data, function(key, value) {
                 //Añadimos la comunidades en el Select
-                $("#select_comunidad").append('<option value=' + value.id + '>' + value.comunidad + '</option>');
+                if(value.id===<?php echo $datos_tasacion['comunidad_id']; ?>){
+                    $("#select_comunidad").append('<option value=' + value.id + ' selected>' + value.comunidad + '</option>');
+                }else{
+                    $("#select_comunidad").append('<option value=' + value.id + '>' + value.comunidad + '</option>');
+                }
         }); // close each()
     }); // close getJSON()
+    
+    //Función para cargar un select Provincias desde un archivo JSON
+    $.getJSON('json/provincias.json', function(data) {
+        $.each(data, function(key, value) {
+                //Añadimos la comunidades en el Select
+                if(value.id===<?php echo $datos_tasacion['provincia_id']; ?>){
+                    $("#select_provincia").append('<option value=' + value.id + ' selected>' + value.provincia + '</option>');
+                }else{
+                    $("#select_provincia").append('<option value=' + value.id + '>' + value.provincia + '</option>');
+                }
+        }); // close each()
+    }); // close getJSON()
+    
+        //Función para cargar un select Provincias desde un archivo JSON
+    $.getJSON('json/municipios.json', function(data) {
+        $.each(data, function(key, value) {
+                //Añadimos la comunidades en el Select
+                if(value.id===<?php echo $datos_tasacion['municipio_id']; ?>){
+                    $("#select_municipio").append('<option value=' + value.id + ' selected>' + value.municipio + '</option>');
+                }else{
+                    $("#select_municipio").append('<option value=' + value.id + '>' + value.municipio + '</option>');
+                }
+        }); // close each()
+    }); // close getJSON()
+    
+    //Función para cargar un select Tipos de Via desde un archivo JSON
+    $.getJSON('json/tipos_de_via.json', function(data) {
+        $.each(data, function(key, value) {
+                //Añadimos la comunidades en el Select
+                if(value.id===<?php echo $datos_tasacion['id_tipo_de_via']; ?>){
+                    $("#select_tipo_via").append('<option value=' + value.id + ' selected>' + value.tipo + '</option>');
+                }else{
+                    $("#select_tipo_via").append('<option value=' + value.id + '>' + value.tipo + '</option>');
+                }
+                
+        }); // close each()
+    }); // close getJSON()
+    
+    
+    //Función para cargar un select Tipos de Vivienda desde un archivo JSON
+    $.getJSON('json/tipos_de_vivienda.json', function(data) {
+        $.each(data, function(key, value) {
+                //Añadimos la comunidades en el Select
+                if(value.id===<?php echo $datos_tasacion['id_tipo_de_vivienda']; ?>){
+                    $("#select_tipo_vivienda").append('<option value=' + value.id + ' selected>' + value.tipo + '</option>');
+                }else{
+                    $("#select_tipo_vivienda").append('<option value=' + value.id + '>' + value.tipo + '</option>');
+                }
+                
+        }); // close each()
+    }); // close getJSON()
+    
+    //Función para cargar un select Tipos de Vivienda desde un archivo JSON
+    $.getJSON('json/viviendas.json', function(data) {
+        $.each(data, function(key, value) {
+                //Añadimos la comunidades en el Select
+                if(value.id===<?php echo $datos_tasacion['id_vivienda']; ?>){
+                    $("#select_viviendas").append('<option value=' + value.id + ' selected>' + value.vivienda + '</option>');
+                }else{
+                    $("#select_viviendas").append('<option value=' + value.id + '>' + value.vivienda + '</option>');
+                }
+                
+        }); // close each()
+    }); // close getJSON()
+    
+    
     
     
     //Si cambiamos el valor del Select Comunidad, cargamos las provincias pertinentes en el Select Provincias
@@ -276,7 +347,9 @@ $(document).ready(function(){
                     
                         //Si la comunidad coincide con la provincia la añadimos al select.
                         if(parseInt(id_comunidad)===value.comunidad_id){
+                            
                             $("#select_provincia").append('<option value=' + value.id + '>' + value.provincia + '</option>');
+                            
                         }
                 }); // close each()
             }); // close getJSON()
@@ -318,34 +391,15 @@ $(document).ready(function(){
             
         }
         
-    });    
+    });
     
-    
-    //Función para cargar un select Tipos de Via desde un archivo JSON
-    $.getJSON('json/tipos_de_via.json', function(data) {
-        $.each(data, function(key, value) {
-                //Añadimos la comunidades en el Select
-                $("#select_tipo_via").append('<option value=' + value.id + '>' + value.tipo + '</option>');
-        }); // close each()
-    }); // close getJSON()
-    
-    
-    //Función para cargar un select Tipos de Vivienda desde un archivo JSON
-    $.getJSON('json/tipos_de_vivienda.json', function(data) {
-        $.each(data, function(key, value) {
-                //Añadimos la comunidades en el Select
-                $("#select_tipo_vivienda").append('<option value=' + value.id + '>' + value.tipo + '</option>');
-        }); // close each()
-    }); // close getJSON()
-    
-    
-        //Si cambiamos el valor del Select Provincia, cargamos los municipios pertinentes en el Select Municipios
+    //Si cambiamos el valor del Select tipos de vivienda, cargamos las municipios viviendas en el Select Viviendas
     $("#select_tipo_vivienda").change(function(){
         
-        //Obtenemos el ID de la provincia
+        //Obtenemos el ID del tipo de vivienda
         var id_tipo_vivienda = $("#select_tipo_vivienda").val();
         
-        //Según el valor habilitamos o no el Select Municipio.
+        //Según el valor habilitamos o no el Select Viviendas.
         if(id_tipo_vivienda==='0'){
             $("#select_viviendas").prop("disabled",true);
         }else{
@@ -365,14 +419,19 @@ $(document).ready(function(){
                     
                         //Si la provincias coincide con municipio lo añadimos al select.
                         if(parseInt(id_tipo_vivienda)===value.id_tipo_de_vivienda){
+                            
                             $("#select_viviendas").append('<option value=' + value.id + '>' + value.vivienda + '</option>');
+                            
+                            
                         }
                 }); // close each()
             }); // close getJSON()
             
         }
         
-    }); 
+    });
+    
+    
     
     
 });//Final Document Ready Function
@@ -413,26 +472,6 @@ function filter(__val__){
        return false;
     }
     
-}
-
-</script>
-<script>
-function capitalizar_texto(texto){
-    
-    texto = texto.toLowerCase();
-    var texto_salida="";    
-    var palabras = texto.split(" ");
-
-    for (let i=0; i < palabras.length; i++) {
-        palabras[i] = palabras[i][0].toUpperCase() + palabras[i].substr(1);
-        texto_salida += palabras[i] + " ";
-        
-    }
-    
-    texto_salida = texto_salida.substring(0, texto_salida.length - 1);
-
-    return texto_salida;
-
 }
 
 </script>

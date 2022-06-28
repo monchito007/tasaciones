@@ -22,6 +22,38 @@ function consulta_sql($query){
     
 }
 
+function convertir_res_mysql_en_array($res){
+    
+    return mysqli_fetch_array($res);
+    
+}
+
+//Función para realizar una consulta SQL a partir de una Query y devolver el resultado
+function obtener_tasacion_sql($id_tasacion){
+    
+    //Abrimos la conexión al servidor MySQL
+    $con = connect_db();
+    
+    //formato de datos utf8
+    //mysqli_set_charset($con, "utf8"); //formato de datos utf8
+    
+    //Construimos la sentencia SQL
+    $query = "SELECT * FROM tasaciones WHERE id=".$id_tasacion;
+    
+    //Obtenemos los datos de la Query
+    $datos = mysqli_query($con, $query);
+    
+    //Liberamos la memoria del resultado, 
+    //mysqli_free_result($datos);
+
+    //Cerramos la conexion al servidor MySQL
+    mysqli_close($con);
+    
+    //Devolvemos los datos
+    return convertir_res_mysql_en_array($datos);
+    
+}
+
 //Función para obtener el número de registros de la tabla Tasaciones
 function obtener_num_tasaciones(){
     
