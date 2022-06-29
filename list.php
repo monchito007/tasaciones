@@ -20,7 +20,7 @@ if(!isset($_SESSION['order'])){
 }else{
     $order = $_SESSION['order'];
     
-    if($order=="ASC"){$order="DESC";}     
+    if($order=="ASC"){$order="DESC";}
     else{$order="ASC";}
 }
 
@@ -156,7 +156,8 @@ $result = consulta_sql($query);
 
 
 <div id="content2">
-    <table class="table table-hover">
+    <button onclick="exportTableToExcel('tblData')">Exportar a Excel</button>
+    <table class="table table-hover" id="tblData">
         <thead>
             <tr>
                 <th scope="col"><a href="content.php?orderby=id">Id</a></th>
@@ -201,6 +202,7 @@ $result = consulta_sql($query);
 ?>      
         </tbody>
     </table>
+    
 </div>
 <script type="text/javascript">
 
